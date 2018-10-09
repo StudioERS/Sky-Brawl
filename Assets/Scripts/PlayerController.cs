@@ -72,6 +72,8 @@ public class PlayerController : MonoBehaviour {
 
         Vector3 _cameraRotation = new Vector3(_xRot, 0, 0) * lookSensitivity;
 
+
+
         motor.RotateCamera(_cameraRotation);
     }
 }
