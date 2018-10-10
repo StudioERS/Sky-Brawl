@@ -5,25 +5,25 @@ using UnityEngine.Networking;
 
 
 
-public class KillFieldDeath : MonoBehaviour {
+public class KillFieldDeath : NetworkBehaviour {
     [SerializeField] Transform spawn;
 
 
-    private void OnTriggerEnter(Collider other)
+[ClientRpc] private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.tag == "player")
+        if (other.gameObject.tag == "Player")
         {
             Destroy(other.gameObject);
-          //  RpcKillPlayer();
+            RpcKillPlayer();
         }
     }
 
-  /*  [ClientRpc] void RpcKillPlayer()
+    [ClientRpc] void RpcKillPlayer()
     {
         if (isLocalPlayer)
         {
             transform.position = spawn.position;
         }
-    } */
+    } 
 
 }

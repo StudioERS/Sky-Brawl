@@ -2809,7 +2809,7 @@ MonoBehaviour:
   m_OfflineScene: 
   m_OnlineScene: 
   m_SpawnPrefabs: []
-  m_CustomConfig: 0
+  m_CustomConfig: 1
   m_MaxConnections: 4
   m_ConnectionConfig:
     m_PacketSize: 1440
@@ -9006,11 +9006,6 @@ Mesh:
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
   m_MeshOptimized: 0
---- !u!1 &1750592263 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1646108583139060, guid: ac3bebc8259e6d04f93ca9d4714e737d,
-    type: 2}
-  m_PrefabInternal: {fileID: 2072741373}
 --- !u!1001 &2072741373
 Prefab:
   m_ObjectHideFlags: 0
@@ -9069,7 +9064,6 @@ GameObject:
   - component: {fileID: 2123873098}
   - component: {fileID: 2123873097}
   - component: {fileID: 2123873096}
-  - component: {fileID: 2123873101}
   m_Layer: 0
   m_Name: Killfield
   m_TagString: KillField
@@ -9088,7 +9082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cda171b6fda954aae44725b3254b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  player: {fileID: 1750592263}
+  spawn: {fileID: 349463142}
 --- !u!65 &2123873097
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -9156,35 +9150,3 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2123873101
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2123873095}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_SceneId:
-    m_Value: 0
-  m_AssetId:
-    i0: 0
-    i1: 0
-    i2: 0
-    i3: 0
-    i4: 0
-    i5: 0
-    i6: 0
-    i7: 0
-    i8: 0
-    i9: 0
-    i10: 0
-    i11: 0
-    i12: 0
-    i13: 0
-    i14: 0
-    i15: 0
-  m_ServerOnly: 1
-  m_LocalPlayerAuthority: 0
