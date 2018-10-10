@@ -12,10 +12,12 @@ public class PlayerController : MonoBehaviour {
     private float lookSensitivity = 3f;
 
     private PlayerMotor motor;
+    private Animator PlayerAnimator;
 
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
+        PlayerAnimator = GetComponent<Animator>();
         state = States.Alive;
     }
 
@@ -40,12 +42,15 @@ public class PlayerController : MonoBehaviour {
          0 = le personnage ne bouge pas
          1 = droite
          */
+
+
         float _zMovV = Input.GetAxisRaw("Vertical"); //Nous permet de récupérer les touches pour avancer et reculer
         /*
          -1 = recule
          0 = ne bouge pas
          1 = avance
          */
+
 
         Vector3 _moveHorizontal = transform.right * _xMovH; // ( x, y, z) ---> ( 0, 0, 1 )
         Vector3 _moveVertical = transform.forward * _zMovV;
@@ -66,6 +71,8 @@ public class PlayerController : MonoBehaviour {
         float _xRot = Input.GetAxisRaw("Mouse Y"); //Horizontal
 
         Vector3 _cameraRotation = new Vector3(_xRot, 0, 0) * lookSensitivity;
+
+
 
         motor.RotateCamera(_cameraRotation);
     }

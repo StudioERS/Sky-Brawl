@@ -21,6 +21,7 @@ public class PlayerSetup : NetworkBehaviour {
 
     private void Start()
     {
+
         // Si ce n'est pas notre joueur nous allons désactiver des composants, lesquelles sont gérés à partir de UNITY
         if (!isLocalPlayer)
         {

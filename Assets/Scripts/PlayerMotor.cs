@@ -15,10 +15,15 @@ public class PlayerMotor : MonoBehaviour {
     private Vector3 cameraRotation;
     private Rigidbody rb;
 
+    // Animator
+    Animator Anim;
+
+
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
-
+        Anim = GetComponent<Animator>();
     }
 
     public void Move(Vector3 _velocity)
@@ -46,16 +51,21 @@ public class PlayerMotor : MonoBehaviour {
 
     void PerformMovement()
     {
-        if(velocity != Vector3.zero)
+        if (velocity != Vector3.zero)
         {
             // Si on détect un mouvement
             rb.MovePosition(rb.position + velocity * Time.fixedDeltaTime);
+            // Animer le joueur du mouvement selon le paramètre
+            Anim.SetBool("Mouving", true);
         }
+        else
+            Anim.SetBool("Mouving", false);
     }
 
     void PerformRotation()
     {        
         rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation)); // La méthode Euler prend directement une variable Vector3 ( x, y, z )
+        
         cam.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
     }
 
