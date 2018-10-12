@@ -16,7 +16,6 @@ public class PeaGun : GunBase
 
     public override void Shoot(GameObject origin)
     {
-        print(flightParticle.transform.parent);
         Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
 
         flightParticle.Play();
@@ -24,7 +23,7 @@ public class PeaGun : GunBase
         RaycastHit rch;
         if (Physics.Raycast(rayFromCamera, out rch))
         {
-            flightParticle.transform.localPosition = Vector3.RotateTowards(flightParticle.transform.localPosition, rch.point, float.MaxValue, float.MaxValue);
+            flightParticle.transform.LookAt(rch.point);
             flightParticle.Play();
             GunModule.print("Hit " + rch.transform.name + " for " + damageValue);
         }
