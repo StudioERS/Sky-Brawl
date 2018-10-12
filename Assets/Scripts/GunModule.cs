@@ -5,12 +5,16 @@ using UnityStandardAssets.CrossPlatformInput;
 
 public class GunModule : MonoBehaviour {
 
-    private Gun equippedGun;
-    private List<Gun> availableGuns;
+    [SerializeField] GameObject defaultGunPrefab;
+    private GameObject equippedGunPrefab;
+    private GunBase equippedGun;
+    private List<GunBase> availableGuns;
 
     private void Start()
     {
-        
+        equippedGunPrefab = Instantiate(defaultGunPrefab, gameObject.transform);
+
+        equippedGun = equippedGunPrefab.GetComponent<GunBase>();
     }
 
     private void Update()
@@ -22,33 +26,19 @@ public class GunModule : MonoBehaviour {
     }
 }
 
-[System.Serializable]
-public abstract class Gun : System.Object
+public abstract class GunBase : MonoBehaviour
 {
-    private int ammo;
+    protected int ammo;
 
-    [SerializeField] protected int maxAmmo;
-    [SerializeField] protected float projectileSpeed;
+    [Header("Projectile")]
+    [Tooltip("Class to use as projectile")] [SerializeField] protected GameObject projectileMesh;
+    [Tooltip("Particle effect to generate in flight")] [SerializeField] protected ParticleSystem flightParticle;
+    [Tooltip("Particle effect to generate on hit")] [SerializeField] protected ParticleSystem hitParticle;
+
+    [SerializeField] protected float fireRate;
     [SerializeField] protected float damageValue;
     [SerializeField] protected float baseKnockback;
 
-    [Header("Projectile")]
-    [Tooltip("Class to use as projectile")] [SerializeField] GameObject projectileMesh;
-    [Tooltip("Particle effect to generate in flight")] [SerializeField] ParticleSystem flightParticle;
-    [Tooltip("Particle effect to generate on hit")] [SerializeField] ParticleSystem hitParticle;
-
 
     abstract public void Shoot(GameObject origin);
-}
-
-public class PeaGun : Gun
-{
-    public override void Shoot(GameObject origin)
-    {
-        if (Physics.Raycast(new Ray(origin.transform.position, origin.transform.rotation.eulerAngles), out RaycastHit rch))
-        {
-            DamageHandler targetDamageHandler = rch.transform.GetComponent<DamageHandler>();
-            targetDamageHandler.TakeDamage(origin, damageValue)
-        }
-    }
 }

@@ -595,6 +595,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1840551651657876
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4771440072847598}
+  - component: {fileID: 114529020295335298}
+  m_Layer: 0
+  m_Name: Gun Module
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1843422068452108
 GameObject:
   m_ObjectHideFlags: 1
@@ -715,7 +731,7 @@ GameObject:
   - component: {fileID: 114402814121973892}
   m_Layer: 0
   m_Name: Sci-Fi_Soldier
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1253,7 +1269,8 @@ Transform:
   m_LocalRotation: {x: 0.6917773, y: 0.7120634, z: 0.11947505, w: -0.01164788}
   m_LocalPosition: {x: -0.064742886, y: -0.021030808, z: 0.001257472}
   m_LocalScale: {x: 0.9999998, y: 1.0000001, z: 1.0000001}
-  m_Children: []
+  m_Children:
+  - {fileID: 4771440072847598}
   m_Father: {fileID: 4175974834194228}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1414,6 +1431,19 @@ Transform:
   m_Children:
   - {fileID: 4181365428967452}
   m_Father: {fileID: 4362481005502200}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4771440072847598
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840551651657876}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4546777851037496}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4805538805118796
@@ -1780,6 +1810,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   cam: {fileID: 20957449119999200}
+--- !u!114 &114529020295335298
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1840551651657876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4793dc955fcf1b4ba57b0c9db6e7829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultGunPrefab: {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18,
+    type: 2}
 --- !u!114 &114591035973842214
 MonoBehaviour:
   m_ObjectHideFlags: 1
