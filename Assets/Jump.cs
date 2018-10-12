@@ -64,6 +64,6 @@ public class Jump : MonoBehaviour {
         if (theCollision.gameObject.name == "Floor")
         {
             isGrounded = false;
-        }
+       }
     }
 }

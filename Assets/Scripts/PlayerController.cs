@@ -3,7 +3,6 @@
 [RequireComponent(typeof(PlayerMotor))]
 public class PlayerController : MonoBehaviour {
 
-
     enum States {Alive, Dead, Incap};
     States state;
     [SerializeField]
@@ -19,6 +18,7 @@ public class PlayerController : MonoBehaviour {
         motor = GetComponent<PlayerMotor>();
         PlayerAnimator = GetComponent<Animator>();
         state = States.Alive;
+        
     }
 
     // Update() va être appeler à toutes les frames, est appelé avant que le frame se fait.
