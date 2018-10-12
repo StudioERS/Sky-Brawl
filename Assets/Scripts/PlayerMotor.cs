@@ -97,8 +97,8 @@ public class PlayerMotor : MonoBehaviour {
 
     public void GiveMunition(string Gun)
     {
-        if (Gun == "Gun1") { MunitionGun1 += 30; Debug.Log(this + ":" + MunitionGun1); }
-            
+        if (Gun == "Gun1") { MunitionGun1 += 30; Debug.Log(this + ":" + MunitionGun1); }    
+        
     }
 
 }
