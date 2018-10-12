@@ -11,6 +11,10 @@ public class Player : NetworkBehaviour {
     private PlayerMotor motor;
     private Rigidbody rb;
 
+    private void Start()
+    {
+        
+    }
 
     private void Awake()
     {
