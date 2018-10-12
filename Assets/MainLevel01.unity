@@ -2341,7 +2341,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 461605570}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -32.271, y: 6.38, z: 44.07}
+  m_LocalPosition: {x: -32.271, y: 4.86, z: 45.67}
   m_LocalScale: {x: 0.8811275, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4611,13 +4611,13 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 951751212}
-  m_LocalRotation: {x: -0.30070576, y: 0, z: 0, w: 0.953717}
-  m_LocalPosition: {x: 25.26, y: 6.41, z: 34.14}
+  m_LocalRotation: {x: -0.21643952, y: 0, z: 0, w: 0.97629607}
+  m_LocalPosition: {x: 25.26, y: 4.91, z: 35.6}
   m_LocalScale: {x: 1, y: 1, z: 1.2728164}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: -35, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: -25, y: 0, z: 0}
 --- !u!1 &956264436
 GameObject:
   m_ObjectHideFlags: 0
@@ -6476,7 +6476,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh33488
+  m_Name: pb_Mesh17008
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -7445,7 +7445,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh33474
+  m_Name: pb_Mesh16994
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -8443,7 +8443,7 @@ Mesh:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_Name: pb_Mesh33394
+  m_Name: pb_Mesh16914
   serializedVersion: 9
   m_SubMeshes:
   - serializedVersion: 2
@@ -9049,6 +9049,11 @@ Prefab:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 114591035973842214, guid: ac3bebc8259e6d04f93ca9d4714e737d,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ac3bebc8259e6d04f93ca9d4714e737d, type: 2}
   m_IsPrefabAsset: 0
@@ -9082,7 +9087,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 34cda171b6fda954aae44725b3254b52, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawn: {fileID: 349463142}
 --- !u!65 &2123873097
 BoxCollider:
   m_ObjectHideFlags: 0

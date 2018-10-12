@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 
 
 public class KillFieldDeath : NetworkBehaviour {
-    [SerializeField] Transform spawn;
+    
 
 
 [ClientRpc] private void OnTriggerEnter(Collider other)
@@ -14,15 +14,15 @@ public class KillFieldDeath : NetworkBehaviour {
         if (other.gameObject.tag == "Player")
         {
             Destroy(other.gameObject);
-            RpcKillPlayer();
+            RpcRespawn();
         }
     }
 
-    [ClientRpc] void RpcKillPlayer()
+    [ClientRpc] void RpcRespawn()
     {
         if (isLocalPlayer)
         {
-            transform.position = spawn.position;
+            
         }
     } 
 
