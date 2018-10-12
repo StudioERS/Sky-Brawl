@@ -1,12 +1,17 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class PeaGun : GunBase
 {
+    LineRenderer laser;
+
     public void Start()
     {
-        flightParticle = Instantiate(flightParticle, gameObject.transform);
+        if (flightParticle != null)
+            flightParticle = Instantiate(flightParticle, gameObject.transform);
+        laser = GetComponent<LineRenderer>();
     }
 
     public PeaGun()
@@ -14,25 +19,38 @@ public class PeaGun : GunBase
 
     }
 
-    public override void Shoot(GameObject origin)
+    public override void Shoot()
     {
-        Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
-
-        flightParticle.Play();
-        Debug.DrawRay(rayFromCamera.origin, rayFromCamera.direction, Color.yellow, 1f);
+        Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 200f);
         RaycastHit rch;
         if (Physics.Raycast(rayFromCamera, out rch))
         {
-            flightParticle.transform.LookAt(rch.point);
-            flightParticle.Play();
-            GunModule.print("Hit " + rch.transform.name + " for " + damageValue);
+            transform.LookAt(rch.point);
+            ShowLaser();
+
+
+            DamageHandler target;
+            if (rch.transform.GetComponent<DamageHandler>() != null)
+            {
+                target = rch.transform.GetComponent<DamageHandler>();
+                target.TakeDamage(gameObject, rch.point);
+            }
         }
         else
         {
-            Quaternion camRotation = Camera.main.transform.rotation;
-            flightParticle.transform.rotation = camRotation;
-            flightParticle.Play();
-            print("Hit nothing");
+            transform.LookAt(rayFromCamera.GetPoint(100));
+            ShowLaser();
         }
+    }
+
+    private void ShowLaser()
+    {
+        laser.enabled = true;
+        Invoke("HideLaser", 0.05f);
+    }
+
+    private void HideLaser()  //STRING REFERENCE
+    {
+        laser.enabled = false;
     }
 }

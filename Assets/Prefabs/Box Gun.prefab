@@ -9,30 +9,30 @@ Prefab:
     m_Modifications: []
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 0}
-  m_RootGameObject: {fileID: 1505199067659110}
+  m_RootGameObject: {fileID: 1498457497827790}
   m_IsPrefabAsset: 1
---- !u!1 &1505199067659110
+--- !u!1 &1498457497827790
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 4726566271534274}
-  - component: {fileID: 114864312373526866}
+  - component: {fileID: 4284944418242566}
+  - component: {fileID: 114558357084544152}
   m_Layer: 0
-  m_Name: Gun Module
+  m_Name: Box Gun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &4726566271534274
+--- !u!4 &4284944418242566
 Transform:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505199067659110}
+  m_GameObject: {fileID: 1498457497827790}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
@@ -40,19 +40,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &114864312373526866
+--- !u!114 &114558357084544152
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1505199067659110}
+  m_GameObject: {fileID: 1498457497827790}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4793dc955fcf1b4ba57b0c9db6e7829, type: 3}
+  m_Script: {fileID: 11500000, guid: ee483111c5d52b24fa6f4a0aec69b837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultGunPrefab: {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18,
+  readyToShoot: 1
+  projectileMesh: {fileID: 1973731727372588, guid: 9cdc42d6f7fd65847b8d3fe4bf5cf5d7,
     type: 2}
-  gunPrefabs:
-  - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
-  - {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d, type: 2}
+  flightParticle: {fileID: 0}
+  hitParticle: {fileID: 0}
+  maxAmmo: 10
+  fireRate: 1
+  damageValue: 10
+  projectileSpeed: 100
+  baseKnockback: 5

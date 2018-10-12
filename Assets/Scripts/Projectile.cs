@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ProjectileModule : MonoBehaviour {
+public class Projectile : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {

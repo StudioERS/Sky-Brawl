@@ -6,6 +6,7 @@ using UnityStandardAssets.CrossPlatformInput;
 public class GunModule : MonoBehaviour {
 
     [SerializeField] GameObject defaultGunPrefab;
+    [SerializeField] GameObject[] gunPrefabs;
     private GameObject equippedGunPrefab;
     private GunBase equippedGun;
     private List<GunBase> availableGuns;
@@ -14,9 +15,6 @@ public class GunModule : MonoBehaviour {
 
     private void Start()
     {
-        anim = GetComponentInParent<Animator>();
-        anim.SetBool
-
         equippedGunPrefab = Instantiate(defaultGunPrefab, gameObject.transform);
 
         equippedGun = equippedGunPrefab.GetComponent<GunBase>();
@@ -24,9 +22,11 @@ public class GunModule : MonoBehaviour {
 
     private void Update()
     {
-        if (CrossPlatformInputManager.GetButtonDown("Fire1"))
+        equippedGun.ProcessShotCooldown();
+        if (CrossPlatformInputManager.GetButtonDown("Fire1") && equippedGun.readyToShoot)
         {
-            equippedGun.Shoot(gameObject);
+            equippedGun.Shoot();
+            equippedGun.readyToShoot = false;
         }
     }
 }
@@ -34,16 +34,35 @@ public class GunModule : MonoBehaviour {
 public abstract class GunBase : MonoBehaviour
 {
     protected int ammo;
+    protected float shotTimer = 0f;
 
-    [Header("Projectile")]
+
+    [Header("Graphics")]
     [Tooltip("Class to use as projectile")] [SerializeField] protected GameObject projectileMesh;
     [Tooltip("Particle effect to generate in flight")] [SerializeField] protected ParticleSystem flightParticle;
     [Tooltip("Particle effect to generate on hit")] [SerializeField] protected ParticleSystem hitParticle;
 
+    [Header("Balance")]
+    [SerializeField] protected int maxAmmo;
     [SerializeField] protected float fireRate;
-    [SerializeField] protected float damageValue;
-    [SerializeField] protected float baseKnockback;
+    [SerializeField] public float damageValue;
+    [SerializeField] protected float projectileSpeed;
+    [SerializeField] public float baseKnockback;
 
+    public bool readyToShoot = true;
 
-    abstract public void Shoot(GameObject origin);
+    public void ProcessShotCooldown()
+    {
+        if (!readyToShoot)
+        {
+            shotTimer += Time.deltaTime;
+
+            if (shotTimer >= fireRate)
+            {
+                readyToShoot = true;
+                shotTimer = 0f;
+            }
+        }
+    }
+    abstract public void Shoot();
 }

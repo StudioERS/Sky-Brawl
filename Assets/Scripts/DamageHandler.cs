@@ -4,15 +4,17 @@ using UnityEngine;
 
 public class DamageHandler : MonoBehaviour {
 
-    private float damage = 0f;
+
     [SerializeField] float exponentialBase = 1.05f;
     [SerializeField] float exponentialCoefficient = 1f;
 
-    Rigidbody rigidbody;
+    private float damage = 0f;
+    new Rigidbody rigidbody;
 
 	// Use this for initialization
 	void Start () {
         rigidbody = GetComponent<Rigidbody>();
+        print(rigidbody.gameObject.name);
 	}
 	
 	// Update is called once per frame
@@ -20,14 +22,14 @@ public class DamageHandler : MonoBehaviour {
 		
 	}
 
-    public void TakeDamage(GameObject source, float damageValue, float knockbackValue = 0f)
+    public void TakeDamage(GameObject source, Vector3 intersection)
     {
+        GunBase enemyWeapon = source.GetComponentInParent<GunBase>();
+
+        damage += enemyWeapon.damageValue;
         float knockbackAmplification = Mathf.Pow(exponentialBase, exponentialCoefficient * damage);
-        float effectiveKnockback = knockbackValue * knockbackAmplification;
+        float effectiveKnockback = enemyWeapon.baseKnockback * knockbackAmplification;
 
-        damage += damageValue;
-        Vector3 vectorFromSource = Vector3.MoveTowards(source.transform.localPosition, gameObject.transform.localPosition, float.MaxValue);
-
-        rigidbody.AddForce(vectorFromSource.normalized * effectiveKnockback, ForceMode.VelocityChange);
+        rigidbody.AddExplosionForce(effectiveKnockback,intersection, 0.1f, 0f, ForceMode.Impulse);
     }
 }
