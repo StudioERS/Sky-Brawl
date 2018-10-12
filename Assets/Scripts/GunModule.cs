@@ -10,8 +10,13 @@ public class GunModule : MonoBehaviour {
     private GunBase equippedGun;
     private List<GunBase> availableGuns;
 
+    private Animator anim;
+
     private void Start()
     {
+        anim = GetComponentInParent<Animator>();
+        anim.SetBool
+
         equippedGunPrefab = Instantiate(defaultGunPrefab, gameObject.transform);
 
         equippedGun = equippedGunPrefab.GetComponent<GunBase>();
