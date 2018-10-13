@@ -9,9 +9,8 @@ public class PeaGun : GunBase
 
     public void Start()
     {
-        if (flightParticle != null)
-            flightParticle = Instantiate(flightParticle, gameObject.transform);
         laser = GetComponent<LineRenderer>();
+        laser.enabled = false;
     }
 
     public PeaGun()
@@ -21,7 +20,7 @@ public class PeaGun : GunBase
 
     public override void Shoot()
     {
-        Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 200f);
+        Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit rch;
         if (Physics.Raycast(rayFromCamera, out rch))
         {

@@ -1703,6 +1703,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   exponentialBase: 1.05
   exponentialCoefficient: 1
+  damage: 0
 --- !u!114 &114412535503787244
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1714,6 +1715,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4793dc955fcf1b4ba57b0c9db6e7829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultGunPrefab: {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d,
+    type: 2}
   gunPrefabs:
   - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
   - {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d, type: 2}
@@ -1858,7 +1861,7 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_Enabled: 1
-  m_Radius: 0.26366794
+  m_Radius: 0.15
   m_Height: 1
   m_Direction: 1
   m_Center: {x: -0.22625373, y: 0, z: -0.031627417}

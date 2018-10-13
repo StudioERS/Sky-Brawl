@@ -51,13 +51,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee483111c5d52b24fa6f4a0aec69b837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  readyToShoot: 1
-  projectileMesh: {fileID: 1973731727372588, guid: 9cdc42d6f7fd65847b8d3fe4bf5cf5d7,
+  projectilePrefab: {fileID: 1973731727372588, guid: 9cdc42d6f7fd65847b8d3fe4bf5cf5d7,
     type: 2}
-  flightParticle: {fileID: 0}
-  hitParticle: {fileID: 0}
   maxAmmo: 10
   fireRate: 1
   damageValue: 10
-  projectileSpeed: 100
+  projectileSpeed: 20
   baseKnockback: 5
+  readyToShoot: 1

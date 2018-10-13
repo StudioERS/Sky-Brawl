@@ -8,13 +8,12 @@ public class DamageHandler : MonoBehaviour {
     [SerializeField] float exponentialBase = 1.05f;
     [SerializeField] float exponentialCoefficient = 1f;
 
-    private float damage = 0f;
+    public float damage = 0f;
     new Rigidbody rigidbody;
 
 	// Use this for initialization
 	void Start () {
         rigidbody = GetComponent<Rigidbody>();
-        print(rigidbody.gameObject.name);
 	}
 	
 	// Update is called once per frame
@@ -31,5 +30,14 @@ public class DamageHandler : MonoBehaviour {
         float effectiveKnockback = enemyWeapon.baseKnockback * knockbackAmplification;
 
         rigidbody.AddExplosionForce(effectiveKnockback,intersection, 0.1f, 0f, ForceMode.Impulse);
+    }
+
+    public void TakeDamage(Projectile source, Vector3 intersection)
+    {
+        damage += source.damageValue;
+        float knockbackAmplification = Mathf.Pow(exponentialBase, exponentialCoefficient * damage);
+        float effectiveKnockback = source.baseKnockback * knockbackAmplification;
+
+        rigidbody.AddForce(intersection * effectiveKnockback, ForceMode.Impulse);
     }
 }

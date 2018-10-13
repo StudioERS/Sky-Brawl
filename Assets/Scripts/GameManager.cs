@@ -6,7 +6,6 @@ public class GameManager : MonoBehaviour {
 
     private const string PLAYER_ID_PREFIX = "Player ";
 
-
     // Dictionnaire de tout les joueurs dans le jeu
     private static Dictionary<string, Player> Players = new Dictionary<string, Player>();
 

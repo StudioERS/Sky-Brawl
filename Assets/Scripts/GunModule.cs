@@ -37,10 +37,8 @@ public abstract class GunBase : MonoBehaviour
     protected float shotTimer = 0f;
 
 
-    [Header("Graphics")]
-    [Tooltip("Class to use as projectile")] [SerializeField] protected GameObject projectileMesh;
-    [Tooltip("Particle effect to generate in flight")] [SerializeField] protected ParticleSystem flightParticle;
-    [Tooltip("Particle effect to generate on hit")] [SerializeField] protected ParticleSystem hitParticle;
+
+    [Tooltip("Class to use as projectile")] [SerializeField] protected GameObject projectilePrefab;
 
     [Header("Balance")]
     [SerializeField] protected int maxAmmo;

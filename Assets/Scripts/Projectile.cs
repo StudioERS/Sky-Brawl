@@ -2,15 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Projectile : MonoBehaviour {
+public abstract class Projectile : MonoBehaviour {
 
-	// Use this for initialization
-	void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update () {
-		
-	}
+    [Header("Graphics")]
+    [Tooltip("Particle effect to generate in flight")] [SerializeField] protected ParticleSystem flightParticle;
+    [Tooltip("Particle effect to generate on hit")] [SerializeField] protected ParticleSystem hitParticle;
+
+    [Header("Balance")]
+    [SerializeField] public float damageValue;
+    [SerializeField] protected float projectileSpeed;
+    [SerializeField] public float baseKnockback;
 }

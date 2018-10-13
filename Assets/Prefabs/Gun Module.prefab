@@ -34,7 +34,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1505199067659110}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -51,7 +51,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4793dc955fcf1b4ba57b0c9db6e7829, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultGunPrefab: {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18,
+  defaultGunPrefab: {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d,
     type: 2}
   gunPrefabs:
   - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
