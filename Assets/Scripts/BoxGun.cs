@@ -30,7 +30,7 @@ public class BoxGun : GunBase {
         else
         {
             transform.LookAt(rayFromCamera.GetPoint(100));
-            GameObject newProjectile = Instantiate(projectilePrefab, gameObject.transform, true);
+            GameObject newProjectile = Instantiate(projectilePrefab, gameObject.transform);
             Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
 
             newProBody.AddRelativeForce( Vector3.forward * projectileSpeed, ForceMode.VelocityChange);

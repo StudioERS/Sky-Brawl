@@ -6,10 +6,13 @@ public class BoxGunProjectile : Projectile {
 
     Collider collider;
     Rigidbody rigidbody;
-	// Use this for initialization
-	void Start () {
+    Projectile projectileComponent;
+    // Use this for initialization
+    void Start () {
         rigidbody = GetComponent<Rigidbody>();
-        
+        projectileComponent = GetComponent<Projectile>();
+
+
 
         collider = GetComponent<Collider>();
         Invoke("SelfDestruct", 5f);
@@ -20,18 +23,9 @@ public class BoxGunProjectile : Projectile {
 		
 	}
 
-    private void OnCollisionEnter(Collision collision)
+    protected void OnCollisionEnter(Collision collision)
     {
-        GameObject other = collision.gameObject;
-        DamageHandler target = other.GetComponent<DamageHandler>();
-        if (target == null)
-        {
-            return;
-        }
-
-        Vector3 forcePoint = collision.impulse.normalized;
-
-        target.TakeDamage(this, forcePoint);
+        rigidbody.detectCollisions = false;
     }
 
     private void SelfDestruct()

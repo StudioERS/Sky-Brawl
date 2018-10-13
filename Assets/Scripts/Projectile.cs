@@ -12,4 +12,18 @@ public abstract class Projectile : MonoBehaviour {
     [SerializeField] public float damageValue;
     [SerializeField] protected float projectileSpeed;
     [SerializeField] public float baseKnockback;
+
+    protected virtual void Start()
+    {
+        if (flightParticle != null)
+        {
+            flightParticle = Instantiate(flightParticle, gameObject.transform);
+            flightParticle.Play();
+        }
+
+        if (hitParticle != null)
+        {
+            hitParticle = Instantiate(hitParticle, gameObject.transform);
+        }
+    }
 }

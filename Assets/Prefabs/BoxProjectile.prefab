@@ -21,9 +21,9 @@ GameObject:
   - component: {fileID: 4614507777949906}
   - component: {fileID: 33604867343909380}
   - component: {fileID: 23239413945867496}
-  - component: {fileID: 65393050392662668}
   - component: {fileID: 54451554818622274}
   - component: {fileID: 114727071362051874}
+  - component: {fileID: 135357178180408670}
   m_Layer: 10
   m_Name: BoxProjectile
   m_TagString: Untagged
@@ -38,7 +38,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1973731727372588}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.2}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.08, y: 0.08, z: 0.08}
   m_Children: []
   m_Father: {fileID: 0}
@@ -101,18 +101,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &65393050392662668
-BoxCollider:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1973731727372588}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 0.7, y: 0.7, z: 0.7}
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &114727071362051874
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -127,5 +115,17 @@ MonoBehaviour:
   flightParticle: {fileID: 0}
   hitParticle: {fileID: 0}
   damageValue: 10
-  projectileSpeed: 20
-  baseKnockback: 5
+  projectileSpeed: 50
+  baseKnockback: 1
+--- !u!135 &135357178180408670
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1973731727372588}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.6
+  m_Center: {x: 0, y: 0, z: 0}

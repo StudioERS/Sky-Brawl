@@ -10,6 +10,7 @@ public class DamageHandler : MonoBehaviour {
 
     public float damage = 0f;
     new Rigidbody rigidbody;
+    [SerializeField] float upwardModifier = 1f;
 
 	// Use this for initialization
 	void Start () {
@@ -20,6 +21,33 @@ public class DamageHandler : MonoBehaviour {
 	void Update () {
 		
 	}
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        Rigidbody otherRigidbody = collision.rigidbody;
+        Projectile projectileComponent = otherRigidbody.GetComponent<Projectile>();
+
+        if (projectileComponent == null)
+        {
+            return;
+        }
+
+        damage += projectileComponent.damageValue;
+
+        float rawKnockbackAmplification = Mathf.Pow(exponentialBase, exponentialCoefficient * damage);
+        float knockbackAmplification = Mathf.Clamp(rawKnockbackAmplification, 1f, 100f);
+        float effectiveKnockback = projectileComponent.baseKnockback + knockbackAmplification;
+
+        Vector3 otherCenterOfMass = otherRigidbody.centerOfMass;
+        Vector3 firstContact = collision.contacts[0].point;
+        Vector3 firstContactNormal = collision.contacts[0].normal;
+
+        Vector3 adjustedNormal = (firstContactNormal) + new Vector3(0, upwardModifier, 0);
+
+        Debug.DrawRay(firstContact, adjustedNormal, Color.red, 10f);
+        Debug.DrawRay(firstContact, firstContactNormal, Color.blue, 10f);
+        rigidbody.AddForce(adjustedNormal * effectiveKnockback, ForceMode.Impulse);
+    }
 
     public void TakeDamage(GameObject source, Vector3 intersection)
     {
