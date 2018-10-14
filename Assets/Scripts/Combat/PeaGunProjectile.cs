@@ -20,8 +20,8 @@ public class PeaGunProjectile : Projectile {
 
     protected override void OnCollisionEnter(Collision collision)
     {
-        base.OnCollisionEnter(collision);
         rigidbody.detectCollisions = false;
-        Destroy(gameObject);
+        base.OnCollisionEnter(collision);
+
     }
 }

@@ -27,7 +27,7 @@ public class PeaGun : GunBase
         Invoke("HideLaser", 0.05f);
     }
 
-    private void HideLaser()  //STRING REFERENCE
+    private void HideLaser()  //STRING REFERENCED
     {
         laser.enabled = false;
     }

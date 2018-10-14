@@ -36,7 +36,7 @@ public class GunModule : MonoBehaviour {
         //Todo activate/de-active meshes once we have them.
 
         //Looping
-        if (gunIndex == availableGuns.Count)
+        if (gunIndex >= availableGuns.Count)
         {
             gunIndex = 0;
         }
@@ -75,6 +75,7 @@ public class GunModule : MonoBehaviour {
 
 public abstract class GunBase : MonoBehaviour
 {
+    //Todo implement ammo
     protected int ammo;
     protected float shotTimer = 0f;
 
@@ -84,16 +85,15 @@ public abstract class GunBase : MonoBehaviour
 
     [Header("Balance")]
     [SerializeField] protected int maxAmmo;
-    [SerializeField] protected float fireRate;
-    [SerializeField] public float damageValue;
+    [SerializeField] [Tooltip("Cooldown time")] protected float fireRate;
     [SerializeField] protected float projectileSpeed;
-    [SerializeField] public float baseKnockback;
 
     protected bool readyToShoot = true;
     protected ProjectileModule projectileModule;
 
     protected virtual void Start()
     {
+        //Finds the projectile module attached to child prefab.
         projectileModule = GetComponentInChildren<ProjectileModule>();
     }
 
@@ -121,11 +121,17 @@ public abstract class GunBase : MonoBehaviour
 
     protected void CreateProjectile()
     {
+        //Casts ray from camera through middle of the screen.
         Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit rch;
+
+        //If the ray hit something
         if (Physics.Raycast(rayFromCamera, out rch))
         {
+            //Turn gun towards thing it hit
             transform.LookAt(rch.point);
+
+            //Shoot projectile.
             GameObject newProjectile = Instantiate(projectilePrefab, projectileModule.transform);
             Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
             newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);

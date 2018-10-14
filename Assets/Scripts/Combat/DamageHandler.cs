@@ -11,7 +11,7 @@ public class DamageHandler : MonoBehaviour {
      * c = exponentialCoefficient
      * d = damage
     */
-    [SerializeField] float exponentialBase = 1.04f;                 //x
+    [SerializeField] float exponentialBase = 1.05f;                 //x
     [SerializeField] float exponentialCoefficient = 1f;             //c
     public float damage = 0f;                                       //d
 
@@ -32,13 +32,14 @@ public class DamageHandler : MonoBehaviour {
     {
         Rigidbody otherRigidbody = collision.rigidbody;
         Projectile projectileComponent = otherRigidbody.GetComponent<Projectile>();
-        upwardModifier = projectileComponent.upwardModifier;
 
         //If it's not a collision with one of our projectile components (e.g. with terrain), return.
         if (projectileComponent == null)
         {
             return;
         }
+
+        upwardModifier = projectileComponent.upwardModifier;
 
         //Increments damage
         damage += projectileComponent.damageValue;
@@ -49,7 +50,7 @@ public class DamageHandler : MonoBehaviour {
         float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
 
         //Setting a maximum, if we want one.
-        float knockbackAmplification = Mathf.Clamp(quadraticKBAmp, 1f, 50f);
+        float knockbackAmplification = Mathf.Clamp(quadraticKBAmp, 1f, 100f);
 
         //Calculating effective knockback
         float effectiveKnockback = projectileComponent.baseKnockback * knockbackAmplification;

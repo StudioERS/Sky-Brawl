@@ -13,12 +13,14 @@ public abstract class Projectile : MonoBehaviour {
     [SerializeField] public float baseKnockback;
     [SerializeField] public float upwardModifier;
 
+    //Stashes bullets in there for cleanliness
     [Header("Miscellaneous")] [SerializeField] protected GameObject bulletBin;
  
     protected float maxLifetime = 5f;
 
     protected virtual void Start()
     {
+        //Instantiate and activate particles.
         if (flightParticle != null)
         {
             flightParticle = Instantiate(flightParticle, gameObject.transform);
@@ -39,11 +41,12 @@ public abstract class Projectile : MonoBehaviour {
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
+        //Todo: add hitFX instantiation
         CancelInvoke();
         Invoke("SelfDestruct", 0.5f);
     }
 
-    protected void SelfDestruct()
+    protected void SelfDestruct()       //STRING REFERENCED
     {
         Destroy(gameObject);
     }
