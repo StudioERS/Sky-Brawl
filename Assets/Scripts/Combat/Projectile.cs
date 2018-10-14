@@ -10,8 +10,12 @@ public abstract class Projectile : MonoBehaviour {
 
     [Header("Balance")]
     [SerializeField] public float damageValue;
-    [SerializeField] protected float projectileSpeed;
     [SerializeField] public float baseKnockback;
+    [SerializeField] public float upwardModifier;
+
+    [Header("Miscellaneous")] [SerializeField] protected GameObject bulletBin;
+ 
+    protected float maxLifetime = 5f;
 
     protected virtual void Start()
     {
@@ -25,5 +29,22 @@ public abstract class Projectile : MonoBehaviour {
         {
             hitParticle = Instantiate(hitParticle, gameObject.transform);
         }
+
+        if (bulletBin != null)
+        {
+            transform.SetParent(bulletBin.transform);
+        }
+        Invoke("SelfDestruct", maxLifetime);
+    }
+
+    protected virtual void OnCollisionEnter(Collision collision)
+    {
+        CancelInvoke();
+        Invoke("SelfDestruct", 0.5f);
+    }
+
+    protected void SelfDestruct()
+    {
+        Destroy(gameObject);
     }
 }

@@ -52,15 +52,11 @@ public class GunModule : MonoBehaviour {
 
     private void Update()
     {
-        //Process fire rate.
-
-        equippedGun.ProcessShotCooldown();
 
         //Call appropriate shoot method.
-        if (CrossPlatformInputManager.GetButtonDown("Fire1") && equippedGun.readyToShoot)
+        if (CrossPlatformInputManager.GetButtonDown("Fire1"))
         {
             equippedGun.Shoot();
-            equippedGun.readyToShoot = false;
         }
 
         //Weapon swapping.
@@ -93,14 +89,23 @@ public abstract class GunBase : MonoBehaviour
     [SerializeField] protected float projectileSpeed;
     [SerializeField] public float baseKnockback;
 
-    public bool readyToShoot = true;
+    protected bool readyToShoot = true;
+    protected ProjectileModule projectileModule;
+
+    protected virtual void Start()
+    {
+        projectileModule = GetComponentInChildren<ProjectileModule>();
+    }
 
     public void ProcessShotCooldown()
     {
+        //only proceed if not ready to shoot.
         if (!readyToShoot)
         {
+            //Adds to timer.
             shotTimer += Time.deltaTime;
 
+            //If timer reaches firing rate, set ready to shoot to true and reset timer.
             if (shotTimer >= fireRate)
             {
                 readyToShoot = true;
@@ -108,5 +113,38 @@ public abstract class GunBase : MonoBehaviour
             }
         }
     }
-    abstract public void Shoot();
+
+    protected void Update()
+    {
+        ProcessShotCooldown();
+    }
+
+    protected void CreateProjectile()
+    {
+        Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
+        RaycastHit rch;
+        if (Physics.Raycast(rayFromCamera, out rch))
+        {
+            transform.LookAt(rch.point);
+            GameObject newProjectile = Instantiate(projectilePrefab, projectileModule.transform);
+            Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
+            newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
+        }
+        else
+        {
+            transform.LookAt(rayFromCamera.GetPoint(100));
+            GameObject newProjectile = Instantiate(projectilePrefab, projectileModule.transform);
+            Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
+
+            newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
+        }
+    }
+
+    virtual public void Shoot()
+    {
+        if (!readyToShoot) { return; }
+        readyToShoot = false;
+
+        CreateProjectile();
+    }
 }
