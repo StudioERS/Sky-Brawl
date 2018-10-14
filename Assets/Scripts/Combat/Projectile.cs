@@ -41,7 +41,10 @@ public abstract class Projectile : MonoBehaviour {
 
     protected virtual void OnCollisionEnter(Collision collision)
     {
-        //Todo: add hitFX instantiation
+        if (hitParticle != null)
+        {
+            hitParticle.Play();
+        }
         CancelInvoke();
         Invoke("SelfDestruct", 0.5f);
     }

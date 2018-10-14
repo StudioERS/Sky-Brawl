@@ -28,6 +28,33 @@ public class DamageHandler : MonoBehaviour {
 		
 	}
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+        Projectile projectileComponent = otherRigidbody.GetComponent<Projectile>();
+
+        //If it's not a collision with one of our projectile components (e.g. with terrain), return.
+        if (projectileComponent == null)
+        {
+            return;
+        }
+
+        upwardModifier = projectileComponent.upwardModifier;
+        damage += projectileComponent.damageValue;
+
+        //Building the knockback formula
+        float sqrtOfDamage = Mathf.Sqrt(damage);
+        float linearKBAmp = (1 + damage / 10);
+        float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
+
+        float knockbackAmplification = Mathf.Clamp(quadraticKBAmp, 1f, 100f);
+
+        //Calculating effective knockback
+        float effectiveKnockback = projectileComponent.baseKnockback * knockbackAmplification;
+
+        rigidbody.AddExplosionForce(effectiveKnockback, otherRigidbody.centerOfMass, 2, upwardModifier, ForceMode.Impulse);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody otherRigidbody = collision.rigidbody;
