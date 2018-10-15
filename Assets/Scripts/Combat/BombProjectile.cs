@@ -16,10 +16,35 @@ public class BombProjectile : Projectile {
     protected override void OnCollisionEnter(Collision collision)
     {
         base.OnCollisionEnter(collision);
-
-        if (Physics.SphereCast(rigidbody.centerOfMass, explosionRadius, Vector3.zero, out RaycastHit hitInfo))
+        rigidbody.detectCollisions = false;
+        RaycastHit[] hits = Physics.SphereCastAll(rigidbody.centerOfMass, explosionRadius, rigidbody.centerOfMass);
+        if (hits.Length != 0)
         {
-            //Implement GUI hit feedback here.
+
+            foreach (RaycastHit hit in hits)
+            {
+                DamageHandler targetDH = hit.transform.GetComponent<DamageHandler>();
+
+                if (targetDH == null) { continue; }
+
+                Rigidbody otherRigidbody = hit.transform.GetComponent<Rigidbody>();
+
+                targetDH.damage += damageValue;
+
+                //Building the knockback formula
+                float sqrtOfDamage = Mathf.Sqrt(damageValue);
+                float linearKBAmp = (1 + damageValue / 10);
+                float quadraticKBAmp = Mathf.Pow(targetDH.exponentialBase, targetDH.exponentialCoefficient * sqrtOfDamage);
+
+                float knockbackAmplification = Mathf.Clamp(quadraticKBAmp, 1f, 100f);
+
+                //Calculating effective knockback
+                float effectiveKnockback = baseKnockback * knockbackAmplification;
+
+                otherRigidbody.AddExplosionForce(effectiveKnockback, rigidbody.centerOfMass, explosionRadius, upwardModifier, ForceMode.Impulse);
+            }
         }
+        CancelInvoke();
+        SelfDestruct();
     }
 }

@@ -44,6 +44,7 @@ public abstract class Projectile : MonoBehaviour {
         if (hitParticle != null)
         {
             hitParticle.Play();
+            transform.DetachChildren();
         }
         CancelInvoke();
         Invoke("SelfDestruct", 0.5f);

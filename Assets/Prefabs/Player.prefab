@@ -629,6 +629,22 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!1 &1836431671557334
+GameObject:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4720792310182770}
+  - component: {fileID: 114777300818354682}
+  m_Layer: 0
+  m_Name: Gun Module
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
 --- !u!1 &1852883072505650
 GameObject:
   m_ObjectHideFlags: 1
@@ -775,22 +791,6 @@ GameObject:
   - component: {fileID: 4485045674492172}
   m_Layer: 0
   m_Name: RigArmRightFing41
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!1 &1983486149718930
-GameObject:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 4323310570217636}
-  - component: {fileID: 114412535503787244}
-  m_Layer: 0
-  m_Name: Gun Module
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1066,19 +1066,6 @@ Transform:
   m_Father: {fileID: 4714817171028992}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!4 &4323310570217636
-Transform:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983486149718930}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.2, y: -0.2, z: 0.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 4731920190051424}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4356694966418052
 Transform:
   m_ObjectHideFlags: 1
@@ -1331,6 +1318,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!4 &4720792310182770
+Transform:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836431671557334}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.2, y: -0.2, z: 0.2}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 4731920190051424}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &4721706700654510
 Transform:
   m_ObjectHideFlags: 1
@@ -1355,7 +1355,7 @@ Transform:
   m_LocalPosition: {x: -0.064742886, y: -0.021030808, z: 0.001257472}
   m_LocalScale: {x: 0.9999998, y: 1.0000001, z: 1.0000001}
   m_Children:
-  - {fileID: 4323310570217636}
+  - {fileID: 4720792310182770}
   m_Father: {fileID: 4420207869362872}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1704,22 +1704,6 @@ MonoBehaviour:
   exponentialBase: 1.05
   exponentialCoefficient: 1
   damage: 0
---- !u!114 &114412535503787244
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1983486149718930}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e4793dc955fcf1b4ba57b0c9db6e7829, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  defaultGunPrefab: {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d,
-    type: 2}
-  gunPrefabs:
-  - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
-  - {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d, type: 2}
 --- !u!114 &114436442306056544
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1831,6 +1815,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a85c5e349cb17df4b85883ea088c2f95, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &114777300818354682
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1836431671557334}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e4793dc955fcf1b4ba57b0c9db6e7829, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defaultGunPrefab: {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d,
+    type: 2}
+  gunPrefabs:
+  - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
+  - {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d, type: 2}
+  - {fileID: 1246717140294970, guid: fabd00702cba1854a90600871d4eb56d, type: 2}
 --- !u!114 &114925398605116128
 MonoBehaviour:
   m_ObjectHideFlags: 1

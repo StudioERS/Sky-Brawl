@@ -11,9 +11,9 @@ public class DamageHandler : MonoBehaviour {
      * c = exponentialCoefficient
      * d = damage
     */
-    [SerializeField] float exponentialBase = 1.05f;                 //x
-    [SerializeField] float exponentialCoefficient = 1f;             //c
-    public float damage = 0f;                                       //d
+    [SerializeField] public float exponentialBase = 1.05f;                 //x
+    [SerializeField] public float exponentialCoefficient = 1f;             //c
+    public float damage = 0f;                                              //d
 
     new Rigidbody rigidbody;
     float upwardModifier;
@@ -28,32 +28,32 @@ public class DamageHandler : MonoBehaviour {
 		
 	}
 
-    private void OnTriggerEnter(Collider other)
-    {
-        Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
-        Projectile projectileComponent = otherRigidbody.GetComponent<Projectile>();
+    //private void OnTriggerEnter(Collider other)
+    //{
+    //    Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
+    //    Projectile projectileComponent = otherRigidbody.GetComponent<Projectile>();
 
-        //If it's not a collision with one of our projectile components (e.g. with terrain), return.
-        if (projectileComponent == null)
-        {
-            return;
-        }
+    //    //If it's not a collision with one of our projectile components (e.g. with terrain), return.
+    //    if (projectileComponent == null)
+    //    {
+    //        return;
+    //    }
 
-        upwardModifier = projectileComponent.upwardModifier;
-        damage += projectileComponent.damageValue;
+    //    upwardModifier = projectileComponent.upwardModifier;
+    //    damage += projectileComponent.damageValue;
 
-        //Building the knockback formula
-        float sqrtOfDamage = Mathf.Sqrt(damage);
-        float linearKBAmp = (1 + damage / 10);
-        float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
+    //    //Building the knockback formula
+    //    float sqrtOfDamage = Mathf.Sqrt(damage);
+    //    float linearKBAmp = (1 + damage / 10);
+    //    float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
 
-        float knockbackAmplification = Mathf.Clamp(quadraticKBAmp, 1f, 100f);
+    //    float knockbackAmplification = Mathf.Clamp(quadraticKBAmp, 1f, 100f);
 
-        //Calculating effective knockback
-        float effectiveKnockback = projectileComponent.baseKnockback * knockbackAmplification;
+    //    //Calculating effective knockback
+    //    float effectiveKnockback = projectileComponent.baseKnockback * knockbackAmplification;
 
-        rigidbody.AddExplosionForce(effectiveKnockback, otherRigidbody.centerOfMass, 2, upwardModifier, ForceMode.Impulse);
-    }
+    //    rigidbody.AddExplosionForce(effectiveKnockback, otherRigidbody.centerOfMass, 2f, upwardModifier, ForceMode.Impulse);
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {

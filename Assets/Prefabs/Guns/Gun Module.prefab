@@ -56,3 +56,4 @@ MonoBehaviour:
   gunPrefabs:
   - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
   - {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d, type: 2}
+  - {fileID: 1246717140294970, guid: fabd00702cba1854a90600871d4eb56d, type: 2}
