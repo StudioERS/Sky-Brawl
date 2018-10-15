@@ -9,7 +9,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private float speed = 5f;
     [SerializeField]//Pouvoir re trouver ce paramètre dans le IDE de Unity
-    private float lookSensitivity = 3f;
+    private float lookSensitivityY = 3f;
+    [SerializeField]
+    private float lookSensitivityX = 3f;
 
     private PlayerMotor motor;
     private Animator PlayerAnimator;
@@ -62,7 +64,7 @@ public class PlayerController : MonoBehaviour {
         // On va calculer la rotation du joueur en un Vecteur 3D
         float _yRot = Input.GetAxisRaw("Mouse X"); //Horizontal
 
-        Vector3 _rotation = new Vector3(0, _yRot, 0) * lookSensitivity;
+        Vector3 _rotation = new Vector3(0, _yRot, 0) * lookSensitivityX;
 
         motor.Rotate(_rotation);
 
@@ -70,10 +72,9 @@ public class PlayerController : MonoBehaviour {
         // On va calculer la rotation de la camera en un Vecteur 3D
         float _xRot = Input.GetAxisRaw("Mouse Y"); //Horizontal
 
-        Vector3 _cameraRotation = new Vector3(_xRot, 0, 0) * lookSensitivity;
+        float _cameraRotationX = _xRot * lookSensitivityY;
 
+        motor.RotateCamera(_cameraRotationX);
 
-
-        motor.RotateCamera(_cameraRotation);
     }
 }

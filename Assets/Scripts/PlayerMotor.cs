@@ -5,8 +5,15 @@
 public class PlayerMotor : MonoBehaviour {
     [SerializeField]
     public float health = 100f;
+
+    // section camera
     [SerializeField]
     private Camera cam;
+    private float currentCameraRotationX = 0f;
+    private float cameraRotationX = 0f;
+    [SerializeField]
+    private float cameraRotationLimit = 85f;    // Definition de la limite de la rotation de la camera
+
 
     private int MunitionGun1;
 
@@ -36,9 +43,9 @@ public class PlayerMotor : MonoBehaviour {
         rotation = _rotation;
     }
 
-    public void RotateCamera(Vector3 _cameraRotation)
+    public void RotateCamera(float _cameraRotation)
     {
-        cameraRotation = _cameraRotation;
+        cameraRotationX = _cameraRotation;
     }
 
 
@@ -63,10 +70,14 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     void PerformRotation()
-    {        
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation)); // La méthode Euler prend directement une variable Vector3 ( x, y, z )
-        
-        cam.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
+    {
+        // Récuperation de la rotation + Clamp la rotation 
+        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation));
+        currentCameraRotationX -= cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+
+        // Applique les changements à la caméra après le clamp
+        cam.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
     }
 
     public void TakeDamage(float amount)

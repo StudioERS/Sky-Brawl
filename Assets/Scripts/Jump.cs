@@ -39,7 +39,8 @@ public class Jump : MonoBehaviour {
         {
             jumps--;
             rb.GetComponent<Rigidbody>().velocity = Vector3.up * jumpForce;
-            Anim.SetBool("Jump", true);
+            if(jumps == 1) // Anime si seulement il est a son premier jump
+                Anim.SetBool("Jump", true);
         }
         else if (isGrounded == false)
         {
