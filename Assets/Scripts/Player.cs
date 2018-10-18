@@ -5,8 +5,12 @@ public class Player : NetworkBehaviour {
 
     [SerializeField]
     int maxHealth = 100;
+    [SerializeField]
+    int MaxStock = 5;
     [SyncVar]
     int currentHealth;
+    [SyncVar]
+    int CurrentStock;
 
     private PlayerMotor motor;
     private Rigidbody rb;
