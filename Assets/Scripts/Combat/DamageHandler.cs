@@ -55,6 +55,39 @@ public class DamageHandler : MonoBehaviour {
     //    rigidbody.AddExplosionForce(effectiveKnockback, otherRigidbody.centerOfMass, 2f, upwardModifier, ForceMode.Impulse);
     //}
 
+    private void OnParticleCollision(GameObject other)
+    {
+        Projectile projectileComponent = other.GetComponent<Projectile>();
+        if (projectileComponent == null) { return; }
+
+        ParticleSystem otherParticle = other.GetComponent<ParticleSystem>();
+        ParticleSystem.CollisionModule otherPartCollisionModule = otherParticle.collision;
+        Transform otherTransform = other.GetComponent<Transform>();
+
+        //If we want particle speed to affect knockback, we can use this.
+        float particleSpeed = otherParticle.velocityOverLifetime.speedModifierMultiplier;
+
+        upwardModifier = projectileComponent.upwardModifier;
+
+        //Increments damage
+        damage += projectileComponent.damageValue;
+
+        //Building the knockback formula
+        float sqrtOfDamage = Mathf.Sqrt(damage);
+        float linearKBAmp = (1 + damage / 10);
+        float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
+
+
+        float knockbackAmplification = linearKBAmp * quadraticKBAmp;
+
+        //Calculating effective knockback
+        float effectiveKnockback = projectileComponent.baseKnockback *  knockbackAmplification;
+
+        print((otherTransform.position - rigidbody.position).magnitude + " " + projectileComponent.explosionRadius);
+
+        rigidbody.AddExplosionForce(effectiveKnockback, otherTransform.position, projectileComponent.explosionRadius, upwardModifier, ForceMode.Impulse);
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody otherRigidbody = collision.rigidbody;
@@ -77,19 +110,34 @@ public class DamageHandler : MonoBehaviour {
         float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
 
         //Setting a maximum, if we want one.
-        float knockbackAmplification = Mathf.Clamp(quadraticKBAmp, 1f, 100f);
+        float knockbackAmplification = linearKBAmp * quadraticKBAmp;
 
         //Calculating effective knockback
         float effectiveKnockback = projectileComponent.baseKnockback * knockbackAmplification;
 
         //Calculates first collision point. Todo: improve responsiveness by finding the virtual center.
-        Vector3 firstContact = collision.contacts[0].point;
-        Vector3 firstContactNormal = collision.contacts[0].normal;
+        //Vector3 firstContact = collision.contacts[0].point;
+        //Vector3 firstContactNormal = collision.contacts[0].normal;
+
+        Vector3 compositeContact = Vector3.zero;
+
+        foreach(ContactPoint contact in collision.contacts)
+        {
+            compositeContact += contact.point;
+        }
+
+        compositeContact /= collision.contacts.Length;
+
+        Vector3 direction = (otherRigidbody.position - compositeContact).normalized;
+
+        Debug.DrawRay(rigidbody.position, direction, Color.red, 5f);
 
         //Adds upward movement to the force so that objects don't juste slide around
-        Vector3 adjustedNormal = (firstContactNormal) + new Vector3(0, upwardModifier, 0);
+        Vector3 adjustedDirection = (direction) + new Vector3(0, upwardModifier, 0);
+
+        Debug.DrawRay(rigidbody.position, adjustedDirection, Color.blue, 5f);
 
         //Adds force. WARNING DEPENDENT ON PLAYER RIGIDBODY'S MASS.
-        rigidbody.AddForce(adjustedNormal * effectiveKnockback, ForceMode.Impulse);
+        rigidbody.AddForce(adjustedDirection * effectiveKnockback, ForceMode.Impulse);
     }
 }

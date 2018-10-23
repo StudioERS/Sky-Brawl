@@ -23,9 +23,7 @@ public class GunModule : MonoBehaviour {
 
         foreach (GameObject gun in gunPrefabs)
         {
-            print(gun);
             availableGuns.Add(Instantiate(gun, gameObject.transform));
-            print(availableGuns.Count);
         }
 
         EquipGun();
@@ -91,10 +89,14 @@ public abstract class GunBase : MonoBehaviour
     protected bool readyToShoot = true;
     protected ProjectileModule projectileModule;
 
+    public BulletBin bulletBin;
+
     protected virtual void Start()
     {
         //Finds the projectile module attached to child prefab.
         projectileModule = GetComponentInChildren<ProjectileModule>();
+
+        bulletBin = FindObjectOfType<BulletBin>();
     }
 
     public void ProcessShotCooldown()
@@ -125,22 +127,35 @@ public abstract class GunBase : MonoBehaviour
         Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit rch;
 
+
+
         //If the ray hit something
         if (Physics.Raycast(rayFromCamera, out rch))
         {
             //Turn gun towards thing it hit
             transform.LookAt(rch.point);
 
-            //Shoot projectile.
             GameObject newProjectile = Instantiate(projectilePrefab, projectileModule.transform);
+            Transform newProTrans = newProjectile.GetComponent<Transform>();
             Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
+
+            //Detach projectile and place in trashcan object.
+            newProTrans.SetParent(bulletBin.GetComponent<Transform>());
+
+            //Shoot projectile.
+
             newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
         }
         else
         {
             transform.LookAt(rayFromCamera.GetPoint(100));
+
             GameObject newProjectile = Instantiate(projectilePrefab, projectileModule.transform);
+            Transform newProTrans = newProjectile.GetComponent<Transform>();
             Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
+
+            //Detach projectile and place in trashcan object.
+            newProTrans.SetParent(bulletBin.GetComponent<Transform>());
 
             newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
         }

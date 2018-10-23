@@ -12,14 +12,18 @@ public abstract class Projectile : MonoBehaviour {
     [SerializeField] public float damageValue;
     [SerializeField] public float baseKnockback;
     [SerializeField] public float upwardModifier;
-
-    //Stashes bullets in there for cleanliness
-    [Header("Miscellaneous")] [SerializeField] protected GameObject bulletBin;
- 
+    [SerializeField] public float explosionRadius;
     protected float maxLifetime = 5f;
+
+    protected Rigidbody rigidbody;
+    protected Transform transform;
+    protected MeshRenderer mesh;
 
     protected virtual void Start()
     {
+        rigidbody = GetComponent<Rigidbody>();
+        transform = GetComponent<Transform>();
+        mesh = GetComponent<MeshRenderer>();
         //Instantiate and activate particles.
         if (flightParticle != null)
         {
@@ -31,12 +35,7 @@ public abstract class Projectile : MonoBehaviour {
         {
             hitParticle = Instantiate(hitParticle, gameObject.transform);
         }
-
-        if (bulletBin != null)
-        {
-            transform.SetParent(bulletBin.transform);
-        }
-        Invoke("SelfDestruct", maxLifetime);
+        SelfDestruct(maxLifetime);
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
@@ -44,10 +43,13 @@ public abstract class Projectile : MonoBehaviour {
         if (hitParticle != null)
         {
             hitParticle.Play();
-            transform.DetachChildren();
         }
+    }
+
+    protected void SelfDestruct(float timer)
+    {
         CancelInvoke();
-        Invoke("SelfDestruct", 0.5f);
+        Invoke("SelfDestruct", timer);
     }
 
     protected void SelfDestruct()       //STRING REFERENCED

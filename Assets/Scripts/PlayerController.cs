@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour {
     // Update() va être appeler à toutes les frames, est appelé avant que le frame se fait.
     private void Update()
     {
-        if (state == States.Alive) HandleMovement();
+        if (state == States.Alive && motor != null) HandleMovement();
     }
 
     private void HandleMovement()

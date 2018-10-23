@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 135559206308747898}
   - component: {fileID: 54191331586086394}
   - component: {fileID: 114429886328399096}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Bomb
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -115,11 +115,10 @@ MonoBehaviour:
   flightParticle: {fileID: 0}
   hitParticle: {fileID: 198031856094365206, guid: 415bb9c3e3882954e8e17b3ecc2fb4d5,
     type: 2}
-  damageValue: 20
-  baseKnockback: 10
-  upwardModifier: 3
-  bulletBin: {fileID: 1044886167557846, guid: 894631702cc053f488ab10528f18416c, type: 2}
-  explosionRadius: 2
+  damageValue: 15
+  baseKnockback: 0
+  upwardModifier: 2
+  explosionRadius: 5
 --- !u!135 &135559206308747898
 SphereCollider:
   m_ObjectHideFlags: 1

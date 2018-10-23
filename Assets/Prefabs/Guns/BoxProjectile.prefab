@@ -114,9 +114,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   flightParticle: {fileID: 0}
   hitParticle: {fileID: 0}
-  damageValue: 10
-  baseKnockback: 15
-  upwardModifier: 2
+  damageValue: 5
+  baseKnockback: 1
+  upwardModifier: 1
   bulletBin: {fileID: 1044886167557846, guid: 894631702cc053f488ab10528f18416c, type: 2}
 --- !u!135 &135357178180408670
 SphereCollider:

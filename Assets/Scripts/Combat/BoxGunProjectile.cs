@@ -4,16 +4,10 @@ using UnityEngine;
 
 public class BoxGunProjectile : Projectile {
 
-    new Collider collider;
-    new Rigidbody rigidbody;
-    Projectile projectileComponent;
+
     // Use this for initialization
     protected override void Start () {
         base.Start();
-
-        rigidbody = GetComponent<Rigidbody>();
-        projectileComponent = GetComponent<Projectile>();
-        collider = GetComponent<Collider>();
 	}
 	
 	// Update is called once per frame
@@ -25,5 +19,6 @@ public class BoxGunProjectile : Projectile {
     {
         base.OnCollisionEnter(collision);
         rigidbody.detectCollisions = false;
+        SelfDestruct(0.25f);
     }
 }

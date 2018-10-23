@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class PeaGunProjectile : Projectile {
 
-    new Rigidbody rigidbody;
     Projectile projectileComponent;
 	// Use this for initialization
 	protected override void Start () {
         base.Start();
-        rigidbody = GetComponent<Rigidbody>();
         projectileComponent = GetComponent<Projectile>();
     }
 	
