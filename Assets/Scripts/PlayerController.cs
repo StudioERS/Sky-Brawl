@@ -62,15 +62,15 @@ public class PlayerController : MonoBehaviour {
         // On va calculer la rotation du joueur en un Vecteur 3D
         float _yRot = Input.GetAxisRaw("Mouse X"); //Horizontal
 
-        Vector3 _rotation = new Vector3(0, _yRot, 0) * lookSensitivity;
+        Vector3 _rotation = new Vector3(0f, _yRot, 0f) * lookSensitivity;
 
         motor.Rotate(_rotation);
 
         //Partie Haut en Bas
         // On va calculer la rotation de la camera en un Vecteur 3D
-        float _xRot = Input.GetAxisRaw("Mouse Y"); //Horizontal
+        float _xRot = Input.GetAxisRaw("Mouse Y"); //Vertical
 
-        Vector3 _cameraRotation = new Vector3(_xRot, 0, 0) * lookSensitivity;
+        Vector3 _cameraRotation = new Vector3(_xRot, 0f, 0f) * lookSensitivity;
 
 
 

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class Jump : MonoBehaviour {
 
     private int jumps = 2;//nombre de sauts permit
@@ -32,14 +33,12 @@ public class Jump : MonoBehaviour {
         if (isGrounded == true)
         {
             jumps = 2;
-            Anim.SetBool("Jump", false);
         }
 
         if ((Input.GetButtonDown("Jump")) && (jumps >= 1))
         {
             jumps--;
             rb.GetComponent<Rigidbody>().velocity = Vector3.up * jumpForce;
-            Anim.SetBool("Jump", true);
         }
         else if (isGrounded == false)
         {

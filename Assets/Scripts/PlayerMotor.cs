@@ -13,6 +13,8 @@ public class PlayerMotor : MonoBehaviour {
     private Vector3 velocity;
     private Vector3 rotation;
     private Vector3 cameraRotation;
+
+    [SerializeField]
     private Rigidbody rb;
 
     // Animator
@@ -22,7 +24,6 @@ public class PlayerMotor : MonoBehaviour {
 
     private void Start()
     {
-        rb = GetComponent<Rigidbody>();
         Anim = GetComponent<Animator>();
     }
 
@@ -64,8 +65,8 @@ public class PlayerMotor : MonoBehaviour {
 
     void PerformRotation()
     {        
-        rb.MoveRotation(rb.rotation * Quaternion.Euler(rotation)); // La méthode Euler prend directement une variable Vector3 ( x, y, z )
-        
+        rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + rotation); // La méthode Euler prend directement une variable Vector3 ( x, y, z )
+        Debug.Log(rotation);
         cam.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
     }
 
