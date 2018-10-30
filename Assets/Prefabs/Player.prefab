@@ -720,7 +720,7 @@ GameObject:
   m_Layer: 8
   m_Name: PlayerLookAt
   m_TagString: Untagged
-  m_Icon: {fileID: 4422084297763085224, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -1853,7 +1853,7 @@ MonoBehaviour:
   - {fileID: 114478860804847738}
   - {fileID: 20892736646938416}
   - {fileID: 81391236472758198}
-  - {fileID: 0}
+  - {fileID: 114777300818354682}
   - {fileID: 114436442306056544}
   - {fileID: 114383939782907692}
   remoteLayerName: RemotePlayer
@@ -1870,6 +1870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   cam: {fileID: 20892736646938416}
+  rb: {fileID: 0}
 --- !u!114 &114706931014632898
 MonoBehaviour:
   m_ObjectHideFlags: 1
