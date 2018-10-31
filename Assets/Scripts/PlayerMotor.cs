@@ -6,7 +6,7 @@ public class PlayerMotor : MonoBehaviour {
     [SerializeField]
     public float health = 100f;
     [SerializeField]
-    private Camera cam;
+    private Transform OtherSpine;
 
     private int MunitionGun1;
 
@@ -67,8 +67,8 @@ public class PlayerMotor : MonoBehaviour {
     void PerformRotation()
     {        
         rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + rotation); // La méthode Euler prend directement une variable Vector3 ( x, y, z )
-        Debug.Log(rotation);
-        cam.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
+
+        OtherSpine.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
     }
 
     public void TakeDamage(float amount)

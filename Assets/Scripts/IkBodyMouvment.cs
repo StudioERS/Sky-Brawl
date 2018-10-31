@@ -30,6 +30,5 @@ public class IkBodyMouvment : MonoBehaviour {
         anim.SetLookAtWeight(lookWeight, bodyWeight, headWeight, eyesWeight, clampWeight);
         //Now set our position to look at for this pass
         anim.SetLookAtPosition(lookTarget.position);
-
     }
 }
