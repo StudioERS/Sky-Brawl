@@ -12,9 +12,13 @@ public class PlayerMotor : MonoBehaviour {
 
     private Vector3 velocity;
     private Vector3 rotation;
-    private Vector3 cameraRotation;
+    
 
     [SerializeField]
+    private float cameraRotationLimit = 85f;
+    private float cameraRotationX = 0f;
+    private float currentCameraRotationX = 0f;
+
     private Rigidbody rb;
 
     // Animator
@@ -38,9 +42,9 @@ public class PlayerMotor : MonoBehaviour {
         rotation = _rotation;
     }
 
-    public void RotateCamera(Vector3 _cameraRotation)
+    public void RotateCamera(float _cameraRotation)
     {
-        cameraRotation = _cameraRotation;
+        cameraRotationX = _cameraRotation;
     }
 
 
@@ -65,10 +69,18 @@ public class PlayerMotor : MonoBehaviour {
     }
 
     void PerformRotation()
-    {        
+    {
+        //rotation du corps
         rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + rotation); // La méthode Euler prend directement une variable Vector3 ( x, y, z )
 
-        OtherSpine.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
+        //rotation de l'angle de other spine 
+        currentCameraRotationX -= cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+
+        // Applique les changements à la caméra après le clamp
+        OtherSpine.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+
+        //OtherSpine.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
     }
 
     public void TakeDamage(float amount)

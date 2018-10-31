@@ -424,7 +424,6 @@ GameObject:
   - component: {fileID: 114436442306056544}
   - component: {fileID: 114395747783630396}
   - component: {fileID: 114383939782907692}
-  - component: {fileID: 114961539831264080}
   m_Layer: 8
   m_Name: Player - Copie
   m_TagString: Player
@@ -1938,7 +1937,7 @@ MonoBehaviour:
   - {fileID: 114478860804847738}
   - {fileID: 20892736646938416}
   - {fileID: 81391236472758198}
-  - {fileID: 114961539831264080}
+  - {fileID: 0}
   - {fileID: 114436442306056544}
   - {fileID: 114383939782907692}
   remoteLayerName: RemotePlayer
@@ -1977,19 +1976,6 @@ MonoBehaviour:
   m_SnapThreshold: 5
   m_InterpolateRotation: 10
   m_InterpolateMovement: 1
---- !u!114 &114961539831264080
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1646108583139060}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b1d1276f454242043918a98f20c7924b, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerCamera: {fileID: 4000552274660144}
-  spinTransform: {fileID: 4983418998836412}
 --- !u!136 &136750640388494354
 CapsuleCollider:
   m_ObjectHideFlags: 1

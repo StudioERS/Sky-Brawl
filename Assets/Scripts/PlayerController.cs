@@ -14,21 +14,44 @@ public class PlayerController : MonoBehaviour {
     private PlayerMotor motor;
     private Animator PlayerAnimator;
 
+    private bool mouselockState;
+
     private void Start()
     {
         motor = GetComponent<PlayerMotor>();
         PlayerAnimator = GetComponent<Animator>();
         state = States.Alive;
+        mouselockState = true;
     }
 
     // Update() va être appeler à toutes les frames, est appelé avant que le frame se fait.
     private void Update()
     {
-        if (state == States.Alive && motor != null) HandleMovement();
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            mouselockState = !mouselockState;
+            if (!mouselockState)
+            {
+                Cursor.lockState = CursorLockMode.None;
+
+                //Mouvement of the player
+                motor.Move(Vector3.zero);
+                motor.Rotate(Vector3.zero);
+                motor.RotateCamera(0f);
+            }
+        }
+
+        if (state == States.Alive && motor != null && mouselockState) HandleMovement();        
     }
 
     private void HandleMovement()
     {
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+        }
+        
+
         // On va calculer la vélocité du mouvement du joueur en un Vecteur 3D
         // Permet de reconnaitre la direction vers laquelle on se dirige + à quelle vitesse
 
@@ -70,7 +93,7 @@ public class PlayerController : MonoBehaviour {
         // On va calculer la rotation de la camera en un Vecteur 3D
         float _xRot = Input.GetAxisRaw("Mouse Y"); //Vertical
 
-        Vector3 _cameraRotation = new Vector3(_xRot, 0f, 0f) * lookSensitivity;
+        float _cameraRotation = _xRot * lookSensitivity;
 
 
 
