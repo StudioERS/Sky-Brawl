@@ -8,7 +8,9 @@ public class IkBodyMouvment : MonoBehaviour {
 
     public float ikWeight = 1;
 
-
+    public float GunObjectDiffY = 0.09f;
+    public float GunObjectDiffZ = 0.04f;
+    public float GunObjectDiffX = 0.06f;
     // Spine 
     public Transform lookTarget;
     public float lookWeight;
@@ -19,7 +21,7 @@ public class IkBodyMouvment : MonoBehaviour {
 
 
     //To hold the pistol with hand
-    public Transform rightHandObj = null;
+    public Transform GunObject = null;
 
     // Use this for initialization
     void Start () {
@@ -36,12 +38,14 @@ public class IkBodyMouvment : MonoBehaviour {
 
         // Hand gun holdin handler
         // Set the right hand target position and rotation, if one has been assigned
-        if (rightHandObj != null)
+        if (GunObject != null)
         {
+            Vector3 LogicalGun = new Vector3(GunObjectDiffX, GunObjectDiffY, GunObjectDiffZ);
+
             anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
-            anim.SetIKPosition(AvatarIKGoal.RightHand, rightHandObj.position);
-            anim.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
+            //anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+            anim.SetIKPosition(AvatarIKGoal.RightHand, GunObject.position + LogicalGun);
+            //anim.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
         }
     }
 }

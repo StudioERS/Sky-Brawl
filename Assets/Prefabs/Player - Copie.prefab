@@ -66,7 +66,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4132469960491386}
-  - component: {fileID: 95740808367368578}
   m_Layer: 0
   m_Name: Nerf2
   m_TagString: Untagged
@@ -847,7 +846,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1083275869154002}
   m_LocalRotation: {x: -0.0000018185932, y: 0.7071069, z: -0.000001902887, w: 0.70710677}
-  m_LocalPosition: {x: 0.174, y: -0.231, z: 0.3}
+  m_LocalPosition: {x: 0.103, y: -0.196, z: 0.333}
   m_LocalScale: {x: 0.019989705, y: 0.018832644, z: 0.021903727}
   m_Children:
   - {fileID: 4886005336581120}
@@ -2193,24 +2192,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!95 &95740808367368578
-Animator:
-  serializedVersion: 3
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1083275869154002}
-  m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 148dc090b733b9241861f685f7792fee, type: 3}
-  m_Controller: {fileID: 0}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!95 &95979338459716798
 Animator:
   serializedVersion: 3
@@ -2279,13 +2260,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ikWeight: 1
+  GunObjectDiffY: 0.09
+  GunObjectDiffZ: 0.04
+  GunObjectDiffX: 0.06
   lookTarget: {fileID: 4725090758974564}
   lookWeight: 1
   bodyWeight: 1
   headWeight: 1
   eyesWeight: 0
   clampWeight: 0
-  rightHandObj: {fileID: 4132469960491386}
+  GunObject: {fileID: 4132469960491386}
 --- !u!114 &114395747783630396
 MonoBehaviour:
   m_ObjectHideFlags: 1
