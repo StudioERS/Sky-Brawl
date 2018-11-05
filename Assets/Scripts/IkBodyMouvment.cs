@@ -18,6 +18,9 @@ public class IkBodyMouvment : MonoBehaviour {
     public float clampWeight;
 
 
+    //To hold the pistol with hand
+    public Transform rightHandObj = null;
+
     // Use this for initialization
     void Start () {
         anim = GetComponent<Animator>();
@@ -30,5 +33,15 @@ public class IkBodyMouvment : MonoBehaviour {
         anim.SetLookAtWeight(lookWeight, bodyWeight, headWeight, eyesWeight, clampWeight);
         //Now set our position to look at for this pass
         anim.SetLookAtPosition(lookTarget.position);
+
+        // Hand gun holdin handler
+        // Set the right hand target position and rotation, if one has been assigned
+        if (rightHandObj != null)
+        {
+            anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
+            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+            anim.SetIKPosition(AvatarIKGoal.RightHand, rightHandObj.position);
+            anim.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
+        }
     }
 }

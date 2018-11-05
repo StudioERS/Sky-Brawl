@@ -7,7 +7,7 @@ public class PlayerController : MonoBehaviour {
     enum States {Alive, Dead, Incap};
     States state;
     [SerializeField]
-    private float speed = 5f;
+    private float speed = 1f;
     [SerializeField]//Pouvoir re trouver ce paramètre dans le IDE de Unity
     private float lookSensitivity = 3f;
 
