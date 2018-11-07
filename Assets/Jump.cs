@@ -8,8 +8,9 @@ public class Jump : MonoBehaviour {
     private int jumps = 2;//nombre de sauts permit
 
     //doit faire constructeur pour acceder en public
-    private float jumpForce = 5.0f;
-    private float gravity = 15f;
+
+    [SerializeField] private float jumpForce = 10f;
+    [SerializeField] private float gravity = 15f;
 
     private Rigidbody rb;
 

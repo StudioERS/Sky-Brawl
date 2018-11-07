@@ -2295,6 +2295,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cf14ae03e2b2f4dbe26ec5080dfa88, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  jumpForce: 10
+  gravity: 15
 --- !u!114 &114477911260998264
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2368,9 +2370,10 @@ MonoBehaviour:
   - {fileID: 114478860804847738}
   - {fileID: 20892736646938416}
   - {fileID: 81391236472758198}
-  - {fileID: 114864312373526866, guid: ec8eac97a61f4be4bb72d849e715e7ec, type: 2}
+  - {fileID: 114577382433668890}
   - {fileID: 114436442306056544}
   - {fileID: 114383939782907692}
+  - {fileID: 114395747783630396}
   remoteLayerName: RemotePlayer
 --- !u!114 &114521198560471214
 MonoBehaviour:
@@ -2399,7 +2402,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultGunPrefab: {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d,
     type: 2}
-  gunPrefabs: []
+  gunPrefabs:
+  - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
+  - {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d, type: 2}
+  - {fileID: 1246717140294970, guid: fabd00702cba1854a90600871d4eb56d, type: 2}
 --- !u!114 &114925398605116128
 MonoBehaviour:
   m_ObjectHideFlags: 1
