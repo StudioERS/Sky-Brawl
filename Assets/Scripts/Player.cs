@@ -18,6 +18,11 @@ public class Player : NetworkBehaviour {
         rb = GetComponent<Rigidbody>();
     }
 
+    private void Start()
+    {
+        print(gameObject.transform.parent);
+    }
+
     public void TakeDamage(int _amount)
     {
         currentHealth -= _amount;

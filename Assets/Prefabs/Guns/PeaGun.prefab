@@ -65,7 +65,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1718133343377790}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 4246726583208834}
@@ -97,10 +97,8 @@ MonoBehaviour:
     type: 2}
   maxAmmo: 0
   fireRate: 0.2
-  damageValue: 5
   projectileSpeed: 1000
-  baseKnockback: 0
-  readyToShoot: 1
+  bulletBin: {fileID: 0}
 --- !u!120 &120275577237600538
 LineRenderer:
   m_ObjectHideFlags: 1

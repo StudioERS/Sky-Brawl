@@ -23,7 +23,7 @@ public class GunModule : MonoBehaviour {
 
         foreach (GameObject gun in gunPrefabs)
         {
-            availableGuns.Add(Instantiate(gun, gameObject.transform));
+            availableGuns.Add(Instantiate(gun, gameObject.transform.position, Quaternion.identity, gameObject.transform));
         }
 
         EquipGun();

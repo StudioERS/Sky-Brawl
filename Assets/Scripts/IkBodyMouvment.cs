@@ -44,7 +44,7 @@ public class IkBodyMouvment : MonoBehaviour {
 
             anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
             //anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
-            anim.SetIKPosition(AvatarIKGoal.RightHand, GunObject.position + LogicalGun);
+            anim.SetIKPosition(AvatarIKGoal.RightHand, GunObject.position);
             //anim.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
         }
     }
