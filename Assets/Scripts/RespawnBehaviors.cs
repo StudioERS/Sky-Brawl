@@ -17,8 +17,15 @@ public class RespawnBehaviors : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if (other.tag == "Player")
+
             other.transform.position = RespawnPoint[Random.Range(0, RespawnPoint.Count)].position;
+        DamageHandler playerdamage = other.GetComponent<DamageHandler>();
+        playerdamage.ResetDamage();
+        
+        
+        
+       
         if (other.name == "FreeCar")
             other.transform.position = car.position;
     }

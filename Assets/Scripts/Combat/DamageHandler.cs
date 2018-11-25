@@ -140,4 +140,9 @@ public class DamageHandler : MonoBehaviour {
         //Adds force. WARNING DEPENDENT ON PLAYER RIGIDBODY'S MASS.
         rigidbody.AddForce(adjustedDirection * effectiveKnockback, ForceMode.Impulse);
     }
+
+    public void ResetDamage()
+    {
+        damage = 0f;
+    }
 }
