@@ -33,6 +33,8 @@ public abstract class GunBase : MonoBehaviour
 
     public BulletBin bulletBin;
 
+    public Camera camJoueur;
+
     protected virtual void Start()
     {
         //Finds the projectile module attached to child prefab.
@@ -40,6 +42,7 @@ public abstract class GunBase : MonoBehaviour
         pmTransform = projectileModule.transform;
 
         bulletBin = FindObjectOfType<BulletBin>();
+
     }
 
     public void ProcessShotCooldown()
@@ -69,7 +72,7 @@ public abstract class GunBase : MonoBehaviour
         readyToShoot = false;
 
         //Casts ray from camera through middle of the screen.
-        Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
+        Ray rayFromCamera = camJoueur.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit rch;
 
         GameObject newProjectile;
