@@ -17,8 +17,9 @@ public class PeaGun : GunBase
     public override void Shoot()
     {
 
-        base.Shoot();                           //Handles firing rate and cooldown.
+                                  
         ShowLaser();
+        base.Shoot();
     }
 
     private void ShowLaser()

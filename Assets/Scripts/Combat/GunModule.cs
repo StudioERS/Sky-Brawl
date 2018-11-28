@@ -1,74 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityStandardAssets.CrossPlatformInput;
+using UnityEngine.Networking;
 
 public class GunModule : MonoBehaviour {
 
-    [SerializeField] GameObject defaultGunPrefab;
-    [SerializeField] GameObject[] gunPrefabs;
-    private GameObject equippedGunPrefab;
-    private GunBase equippedGun;
-    private List<GameObject> availableGuns;
 
-    private int gunIndex = 0;
-    private Animator anim;
-
-    private void Start()
-    {
-
-        //Instantiates all guns, then equips first gun in array (index 0).
-        availableGuns = new List<GameObject>();
-
-
-        foreach (GameObject gun in gunPrefabs)
-        {
-            availableGuns.Add(Instantiate(gun, gameObject.transform.position, Quaternion.identity, gameObject.transform));
-        }
-
-        EquipGun();
-    }
-
-    private void EquipGun()
-    {
-        //Todo activate/de-active meshes once we have them.
-
-        //Looping
-        if (gunIndex >= availableGuns.Count)
-        {
-            gunIndex = 0;
-        }
-        else if (gunIndex < 0)
-        {
-            gunIndex = availableGuns.Count - 1;
-        }
-
-        //Change equipped gun prefab and class.
-        equippedGunPrefab = availableGuns[gunIndex];
-        equippedGun = equippedGunPrefab.GetComponent<GunBase>();
-    }
-
-    private void Update()
-    {
-
-        //Call appropriate shoot method.
-        if (CrossPlatformInputManager.GetButtonDown("Fire1"))
-        {
-            equippedGun.Shoot();
-        }
-
-        //Weapon swapping.
-        else if (CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") > 0f)  // Forward
-        {
-            ++gunIndex;
-            EquipGun();
-        }
-        else if (CrossPlatformInputManager.GetAxis("Mouse ScrollWheel") < 0f) // backward
-        {
-            --gunIndex;
-            EquipGun();
-        }
-    }
 }
 
 public abstract class GunBase : MonoBehaviour
@@ -76,6 +13,8 @@ public abstract class GunBase : MonoBehaviour
     //Todo implement ammo
     protected int ammo;
     protected float shotTimer = 0f;
+
+    public Vector3 posOffset;
 
 
 
@@ -88,6 +27,9 @@ public abstract class GunBase : MonoBehaviour
 
     protected bool readyToShoot = true;
     protected ProjectileModule projectileModule;
+    protected Transform pmTransform;
+
+    public bool ReadyToShoot { get { return readyToShoot; } }
 
     public BulletBin bulletBin;
 
@@ -95,6 +37,7 @@ public abstract class GunBase : MonoBehaviour
     {
         //Finds the projectile module attached to child prefab.
         projectileModule = GetComponentInChildren<ProjectileModule>();
+        pmTransform = projectileModule.transform;
 
         bulletBin = FindObjectOfType<BulletBin>();
     }
@@ -121,13 +64,15 @@ public abstract class GunBase : MonoBehaviour
         ProcessShotCooldown();
     }
 
-    protected void CreateProjectile()
+    virtual public void Shoot()
     {
+        readyToShoot = false;
+
         //Casts ray from camera through middle of the screen.
         Ray rayFromCamera = Camera.main.ViewportPointToRay(Vector3.one * 0.5f);
         RaycastHit rch;
 
-
+        GameObject newProjectile;
 
         //If the ray hit something
         if (Physics.Raycast(rayFromCamera, out rch))
@@ -135,7 +80,7 @@ public abstract class GunBase : MonoBehaviour
             //Turn gun towards thing it hit
             transform.LookAt(rch.point);
 
-            GameObject newProjectile = Instantiate(projectilePrefab, projectileModule.transform);
+            newProjectile = (GameObject)Instantiate(projectilePrefab, pmTransform.position, pmTransform.rotation);
             Transform newProTrans = newProjectile.GetComponent<Transform>();
             Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
 
@@ -150,7 +95,7 @@ public abstract class GunBase : MonoBehaviour
         {
             transform.LookAt(rayFromCamera.GetPoint(100));
 
-            GameObject newProjectile = Instantiate(projectilePrefab, projectileModule.transform);
+            newProjectile = (GameObject)Instantiate(projectilePrefab, pmTransform.position, pmTransform.rotation);
             Transform newProTrans = newProjectile.GetComponent<Transform>();
             Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
 
@@ -159,13 +104,7 @@ public abstract class GunBase : MonoBehaviour
 
             newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
         }
-    }
 
-    virtual public void Shoot()
-    {
-        if (!readyToShoot) { return; }
-        readyToShoot = false;
-
-        CreateProjectile();
+        NetworkServer.Spawn(newProjectile);
     }
 }

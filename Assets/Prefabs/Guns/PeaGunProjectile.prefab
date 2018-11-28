@@ -24,6 +24,8 @@ GameObject:
   - component: {fileID: 135134215821633240}
   - component: {fileID: 54379877646429648}
   - component: {fileID: 114698120699485042}
+  - component: {fileID: 114655592712604876}
+  - component: {fileID: 114928444495078634}
   m_Layer: 0
   m_Name: PeaGunProjectile
   m_TagString: Untagged
@@ -101,6 +103,38 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 2
+--- !u!114 &114655592712604876
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123228073058108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 372142912, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SceneId:
+    m_Value: 0
+  m_AssetId:
+    i0: 68
+    i1: 211
+    i2: 92
+    i3: 104
+    i4: 3
+    i5: 191
+    i6: 74
+    i7: 100
+    i8: 250
+    i9: 253
+    i10: 6
+    i11: 91
+    i12: 53
+    i13: 74
+    i14: 11
+    i15: 222
+  m_ServerOnly: 0
+  m_LocalPlayerAuthority: 1
 --- !u!114 &114698120699485042
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -117,7 +151,28 @@ MonoBehaviour:
   damageValue: 5
   baseKnockback: 0
   upwardModifier: 0
-  bulletBin: {fileID: 1044886167557846, guid: 894631702cc053f488ab10528f18416c, type: 2}
+  explosionRadius: 0
+--- !u!114 &114928444495078634
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1123228073058108}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1768714887, guid: dc443db3e92b4983b9738c1131f555cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_TransformSyncMode: 3
+  m_SendInterval: 0.06666667
+  m_SyncRotationAxis: 7
+  m_RotationSyncCompression: 0
+  m_SyncSpin: 0
+  m_MovementTheshold: 0.001
+  m_VelocityThreshold: 0.0001
+  m_SnapThreshold: 5
+  m_InterpolateRotation: 1
+  m_InterpolateMovement: 1
 --- !u!135 &135134215821633240
 SphereCollider:
   m_ObjectHideFlags: 1

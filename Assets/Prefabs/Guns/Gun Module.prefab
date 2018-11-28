@@ -46,7 +46,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1505199067659110}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e4793dc955fcf1b4ba57b0c9db6e7829, type: 3}
   m_Name: 
@@ -54,6 +54,6 @@ MonoBehaviour:
   defaultGunPrefab: {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d,
     type: 2}
   gunPrefabs:
-  - {fileID: 1022945432897324, guid: 6ae2a53f648383e4b89d17c9a5c20e18, type: 2}
-  - {fileID: 1498457497827790, guid: e1844284b183b8845bd833076093dc8d, type: 2}
-  - {fileID: 1246717140294970, guid: fabd00702cba1854a90600871d4eb56d, type: 2}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}

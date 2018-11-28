@@ -43,9 +43,9 @@ public class IkBodyMouvment : MonoBehaviour {
             Vector3 LogicalGun = new Vector3(GunObjectDiffX, GunObjectDiffY, GunObjectDiffZ);
 
             anim.SetIKPositionWeight(AvatarIKGoal.RightHand, 1);
-            //anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
+            anim.SetIKRotationWeight(AvatarIKGoal.RightHand, 1);
             anim.SetIKPosition(AvatarIKGoal.RightHand, GunObject.position);
-            //anim.SetIKRotation(AvatarIKGoal.RightHand, rightHandObj.rotation);
+            anim.SetIKRotation(AvatarIKGoal.RightHand, GunObject.rotation);
         }
     }
 }

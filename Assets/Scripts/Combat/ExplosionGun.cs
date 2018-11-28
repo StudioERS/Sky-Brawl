@@ -4,8 +4,4 @@ using UnityEngine;
 
 public class ExplosionGun : GunBase {
 
-    public override void Shoot()
-    {
-        base.Shoot();
-    }
 }

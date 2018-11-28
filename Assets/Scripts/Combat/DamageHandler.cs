@@ -1,8 +1,10 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Networking;
 
-public class DamageHandler : MonoBehaviour {
+public class DamageHandler : NetworkBehaviour {
 
     /*K = b * (  (1 + d/10)    *    (x^sqrt(c*d))   )
      * K = Final knockback
@@ -13,6 +15,8 @@ public class DamageHandler : MonoBehaviour {
     */
     [SerializeField] public float exponentialBase = 1.05f;                 //x
     [SerializeField] public float exponentialCoefficient = 1f;             //c
+
+    [SyncVar]
     public float damage = 0f;                                              //d
 
     new Rigidbody rigidbody;
@@ -88,6 +92,7 @@ public class DamageHandler : MonoBehaviour {
         rigidbody.AddExplosionForce(effectiveKnockback, otherTransform.position, projectileComponent.explosionRadius, upwardModifier, ForceMode.Impulse);
     }
 
+
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody otherRigidbody = collision.rigidbody;
@@ -103,6 +108,7 @@ public class DamageHandler : MonoBehaviour {
 
         //Increments damage
         damage += projectileComponent.damageValue;
+        //CmdApplyDamage(projectileComponent.damageValue);
 
         //Building the knockback formula
         float sqrtOfDamage = Mathf.Sqrt(damage);
@@ -135,8 +141,19 @@ public class DamageHandler : MonoBehaviour {
         //Adds upward movement to the force so that objects don't juste slide around
         Vector3 adjustedDirection = (direction) + new Vector3(0, upwardModifier, 0);
 
-        Debug.DrawRay(rigidbody.position, adjustedDirection, Color.blue, 5f);
+        //CmdApplyKnockback(adjustedDirection, effectiveKnockback);
+        rigidbody.AddForce(adjustedDirection * effectiveKnockback, ForceMode.Impulse);
+    }
 
+    [Command]
+    private void CmdApplyDamage(float damageValue)
+    {
+
+    }
+
+    [Command]
+    private void CmdApplyKnockback(Vector3 adjustedDirection, float effectiveKnockback)
+    {
         //Adds force. WARNING DEPENDENT ON PLAYER RIGIDBODY'S MASS.
         rigidbody.AddForce(adjustedDirection * effectiveKnockback, ForceMode.Impulse);
     }
