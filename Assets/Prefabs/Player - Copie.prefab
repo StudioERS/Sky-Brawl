@@ -2572,6 +2572,7 @@ MonoBehaviour:
   exponentialBase: 1.05
   exponentialCoefficient: 1
   damage: 0
+  MushForce: 100
 --- !u!114 &114436442306056544
 MonoBehaviour:
   m_ObjectHideFlags: 1

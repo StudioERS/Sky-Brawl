@@ -22,8 +22,10 @@ public class DamageHandler : NetworkBehaviour {
     new Rigidbody rigidbody;
     float upwardModifier;
 
-	// Use this for initialization
-	void Start () {
+    public float MushForce;
+
+    // Use this for initialization
+    void Start () {
         rigidbody = GetComponent<Rigidbody>();
 	}
 	
@@ -96,53 +98,69 @@ public class DamageHandler : NetworkBehaviour {
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody otherRigidbody = collision.rigidbody;
-        Projectile projectileComponent = otherRigidbody.GetComponent<Projectile>();
 
         //If it's not a collision with one of our projectile components (e.g. with terrain), return.
-        if (projectileComponent == null)
+        if (collision.gameObject.tag == "Mushroom")
         {
+            //CmdApplyKnockback(adjustedDirection, effectiveKnockback);
+            rigidbody.AddForce(0f, MushForce, 0f, ForceMode.Impulse);
+        }
+        else if(collision.gameObject.tag == "Train")
+        {
+            //CmdApplyKnockback(adjustedDirection, effectiveKnockback);
+            rigidbody.AddForce(0f, 300, 0f, ForceMode.Impulse);
+
+        }
+        else if(otherRigidbody.GetComponent<Projectile>() == null)
+        {            
             return;
         }
-
-        upwardModifier = projectileComponent.upwardModifier;
-
-        //Increments damage
-        damage += projectileComponent.damageValue;
-        //CmdApplyDamage(projectileComponent.damageValue);
-
-        //Building the knockback formula
-        float sqrtOfDamage = Mathf.Sqrt(damage);
-        float linearKBAmp = (1 + damage / 10);
-        float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
-
-        //Setting a maximum, if we want one.
-        float knockbackAmplification = linearKBAmp * quadraticKBAmp;
-
-        //Calculating effective knockback
-        float effectiveKnockback = projectileComponent.baseKnockback * knockbackAmplification;
-
-        //Calculates first collision point. Todo: improve responsiveness by finding the virtual center.
-        //Vector3 firstContact = collision.contacts[0].point;
-        //Vector3 firstContactNormal = collision.contacts[0].normal;
-
-        Vector3 compositeContact = Vector3.zero;
-
-        foreach(ContactPoint contact in collision.contacts)
+        else
         {
-            compositeContact += contact.point;
+            Projectile projectileComponent = otherRigidbody.GetComponent<Projectile>();
+
+
+            upwardModifier = projectileComponent.upwardModifier;
+
+            //Increments damage
+            damage += projectileComponent.damageValue;
+            //CmdApplyDamage(projectileComponent.damageValue);
+
+            //Building the knockback formula
+            float sqrtOfDamage = Mathf.Sqrt(damage);
+            float linearKBAmp = (1 + damage / 10);
+            float quadraticKBAmp = Mathf.Pow(exponentialBase, exponentialCoefficient * sqrtOfDamage);
+
+            //Setting a maximum, if we want one.
+            float knockbackAmplification = linearKBAmp * quadraticKBAmp;
+
+            //Calculating effective knockback
+            float effectiveKnockback = projectileComponent.baseKnockback * knockbackAmplification;
+
+            //Calculates first collision point. Todo: improve responsiveness by finding the virtual center.
+            //Vector3 firstContact = collision.contacts[0].point;
+            //Vector3 firstContactNormal = collision.contacts[0].normal;
+
+            Vector3 compositeContact = Vector3.zero;
+
+            foreach (ContactPoint contact in collision.contacts)
+            {
+                compositeContact += contact.point;
+            }
+
+            compositeContact /= collision.contacts.Length;
+
+            Vector3 direction = (otherRigidbody.position - compositeContact).normalized;
+
+            Debug.DrawRay(rigidbody.position, direction, Color.red, 5f);
+
+            //Adds upward movement to the force so that objects don't juste slide around
+            Vector3 adjustedDirection = (direction) + new Vector3(0, upwardModifier, 0);
+
+            //CmdApplyKnockback(adjustedDirection, effectiveKnockback);
+            rigidbody.AddForce(adjustedDirection * effectiveKnockback, ForceMode.Impulse);
+
         }
-
-        compositeContact /= collision.contacts.Length;
-
-        Vector3 direction = (otherRigidbody.position - compositeContact).normalized;
-
-        Debug.DrawRay(rigidbody.position, direction, Color.red, 5f);
-
-        //Adds upward movement to the force so that objects don't juste slide around
-        Vector3 adjustedDirection = (direction) + new Vector3(0, upwardModifier, 0);
-
-        //CmdApplyKnockback(adjustedDirection, effectiveKnockback);
-        rigidbody.AddForce(adjustedDirection * effectiveKnockback, ForceMode.Impulse);
     }
 
     [Command]
