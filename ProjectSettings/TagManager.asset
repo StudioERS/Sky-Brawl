@@ -9,6 +9,7 @@ TagManager:
   - Mushroom
   - Rails
   - Train
+  - The Mushroom
   layers:
   - Default
   - TransparentFX

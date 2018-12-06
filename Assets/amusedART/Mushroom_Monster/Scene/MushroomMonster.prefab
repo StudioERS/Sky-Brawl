@@ -66,9 +66,10 @@ GameObject:
   - component: {fileID: 4134828475176406}
   - component: {fileID: 111124742627778558}
   - component: {fileID: 114903787772092396}
+  - component: {fileID: 135538284940770776}
   m_Layer: 0
   m_Name: MushroomMonster
-  m_TagString: Untagged
+  m_TagString: The Mushroom
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -110,15 +111,15 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1640719480071082}
-  m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.00000058114523}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalRotation: {x: 0, y: 0.41207096, z: 0, w: 0.91115177}
+  m_LocalPosition: {x: -11.737252, y: 2.04, z: -0.17257422}
   m_LocalScale: {x: 0.3, y: 0.3, z: 0.3}
   m_Children:
   - {fileID: 4660525252505794}
   - {fileID: 4136897641011480}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 180.00002, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 48.67, z: 0}
 --- !u!4 &4136897641011480
 Transform:
   m_ObjectHideFlags: 1
@@ -217,6 +218,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87f998754931e6249a29867bfd98ab6c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!135 &135538284940770776
+SphereCollider:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1640719480071082}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 2.5526767
+  m_Center: {x: -0.16, y: 1.64, z: 0}
 --- !u!137 &137626588114142564
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 
 public class DamageHandler : NetworkBehaviour {
 
@@ -24,6 +25,12 @@ public class DamageHandler : NetworkBehaviour {
 
     public float MushForce;
 
+    public Text DamagedHandler;
+
+    float TimeWhenPickUp;
+    float Duration;
+
+    public float DurationTime;
     // Use this for initialization
     void Start () {
         rigidbody = GetComponent<Rigidbody>();
@@ -33,7 +40,7 @@ public class DamageHandler : NetworkBehaviour {
 	void Update () {
 		
 	}
-
+    
     //private void OnTriggerEnter(Collider other)
     //{
     //    Rigidbody otherRigidbody = other.GetComponent<Rigidbody>();
@@ -95,6 +102,21 @@ public class DamageHandler : NetworkBehaviour {
     }
 
 
+    private void FixedUpdate()
+    {
+        DamagedHandler.text = damage.ToString() + "%";
+
+        if(TimeWhenPickUp != 0)
+        {
+            if(Duration < Time.time)
+            {
+                TimeWhenPickUp = 0;
+                Duration = 0;
+                this.transform.localScale = new Vector3(1, 1, 1);
+            }
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         Rigidbody otherRigidbody = collision.rigidbody;
@@ -110,6 +132,12 @@ public class DamageHandler : NetworkBehaviour {
             //CmdApplyKnockback(adjustedDirection, effectiveKnockback);
             rigidbody.AddForce(0f, 300, 0f, ForceMode.Impulse);
 
+        }
+        else if (collision.gameObject.tag == "The Mushroom" && TimeWhenPickUp == 0f)
+        {
+            this.transform.localScale = new Vector3(5, 5, 5);
+            TimeWhenPickUp = Time.time;
+            Duration = TimeWhenPickUp + DurationTime;
         }
         else if(otherRigidbody.GetComponent<Projectile>() == null)
         {            
