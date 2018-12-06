@@ -1,8 +1,9 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 
 [RequireComponent(typeof(Rigidbody))]
-public class PlayerMotor : MonoBehaviour {
+public class PlayerMotor : NetworkBehaviour {
     [SerializeField]
     public float health = 100f;
     [SerializeField]
@@ -53,6 +54,7 @@ public class PlayerMotor : MonoBehaviour {
     {
         PerformMovement();
         PerformRotation();
+        CmdPerformRotation();
     }
 
     void PerformMovement()
@@ -68,6 +70,22 @@ public class PlayerMotor : MonoBehaviour {
             Anim.SetBool("Mouving", false);
     }
 
+    [Command]
+    void CmdPerformRotation()
+    {
+        ////rotation du corps
+        //rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + rotation); // La méthode Euler prend directement une variable Vector3 ( x, y, z )
+
+        //rotation de l'angle de other spine 
+        currentCameraRotationX -= cameraRotationX;
+        currentCameraRotationX = Mathf.Clamp(currentCameraRotationX, -cameraRotationLimit, cameraRotationLimit);
+
+        // Applique les changements à la caméra après le clamp
+        OtherSpine.transform.localEulerAngles = new Vector3(currentCameraRotationX, 0f, 0f);
+
+        //OtherSpine.transform.Rotate(-cameraRotation);// Le (-) est obligatoire car c'est renversé cause: les vieux jeux
+    }
+    
     void PerformRotation()
     {
         //rotation du corps

@@ -1,7 +1,8 @@
 ﻿using UnityEngine;
+using UnityEngine.Networking;
 
 [RequireComponent(typeof(PlayerMotor))]
-public class PlayerController : MonoBehaviour {
+public class PlayerController : NetworkBehaviour {
 
 
     enum States {Alive, Dead, Incap};
@@ -37,11 +38,15 @@ public class PlayerController : MonoBehaviour {
                 //Mouvement of the player
                 motor.Move(Vector3.zero);
                 motor.Rotate(Vector3.zero);
-                motor.RotateCamera(0f);
+                motor.RotateCamera(0);
             }
         }
 
-        if (state == States.Alive && motor != null && mouselockState) HandleMovement();        
+        if (state == States.Alive && motor != null && mouselockState)
+        {
+            HandleMovement();
+            CmdRotateCameraVertical();
+        }
     }
 
     private void HandleMovement()
@@ -91,6 +96,18 @@ public class PlayerController : MonoBehaviour {
 
         //Partie Haut en Bas
         // On va calculer la rotation de la camera en un Vecteur 3D
+        float _xRot = Input.GetAxisRaw("Mouse Y"); //Vertical
+
+        float _cameraRotation = _xRot * lookSensitivity;
+
+
+
+        motor.RotateCamera(_cameraRotation);
+        
+    }
+
+    [Command]
+    private void CmdRotateCameraVertical() {
         float _xRot = Input.GetAxisRaw("Mouse Y"); //Vertical
 
         float _cameraRotation = _xRot * lookSensitivity;
