@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
+using UnityEngine.UI;
 using UnityStandardAssets.CrossPlatformInput;
 
 public class PlayerShooting : NetworkBehaviour {
@@ -19,6 +20,9 @@ public class PlayerShooting : NetworkBehaviour {
 
     public bool processInput;
 
+    public Text GunGui;
+
+    public GameObject ToEnable;
 
     public override void OnStartLocalPlayer()
     {
@@ -56,8 +60,16 @@ public class PlayerShooting : NetworkBehaviour {
         EquipGun();
     }
 
+    bool AfterShoot = false;
+
     // Update is called once per frame
     void Update () {
+
+        if (AfterShoot)
+        {
+            ToEnable.SetActive(false);
+            AfterShoot = false;
+        }
 
         if (!processInput) { return; }
 
@@ -68,6 +80,9 @@ public class PlayerShooting : NetworkBehaviour {
             if (equippedGun.ReadyToShoot)
             {
                 CmdShoot(netId);
+                if (gunIndex == 0)
+                    ToEnable.SetActive(true);
+                AfterShoot = true;
             }
         }
 
@@ -80,6 +95,17 @@ public class PlayerShooting : NetworkBehaviour {
         {
             CmdPreviousWeapon();
         }
+    }
+
+    void GunTextChanged()
+    {
+        if (gunIndex == 0)
+            GunGui.text = "Pea Gun";
+        if (gunIndex == 1)
+            GunGui.text = "Box Gun";
+        if (gunIndex == 2)
+            GunGui.text = "Explosion Gun";
+
     }
 
     [Command]
@@ -112,6 +138,8 @@ public class PlayerShooting : NetworkBehaviour {
 
         //Change equipped.
         equippedGun = availableGuns[gunIndex];
+        GunTextChanged();
+
 
         //Change visible mesh
         foreach (GunBase gun in availableGuns)

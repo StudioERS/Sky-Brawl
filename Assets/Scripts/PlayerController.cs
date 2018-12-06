@@ -23,6 +23,7 @@ public class PlayerController : NetworkBehaviour {
         PlayerAnimator = GetComponent<Animator>();
         state = States.Alive;
         mouselockState = true;
+        Cursor.visible = false;
     }
 
     // Update() va être appeler à toutes les frames, est appelé avant que le frame se fait.
@@ -39,6 +40,7 @@ public class PlayerController : NetworkBehaviour {
                 motor.Move(Vector3.zero);
                 motor.Rotate(Vector3.zero);
                 motor.RotateCamera(0);
+                Cursor.visible = true;
             }
         }
 
@@ -46,6 +48,7 @@ public class PlayerController : NetworkBehaviour {
         {
             HandleMovement();
             CmdRotateCameraVertical();
+            Cursor.visible = false;
         }
     }
 
