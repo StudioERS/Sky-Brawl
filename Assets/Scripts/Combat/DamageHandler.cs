@@ -26,15 +26,19 @@ public class DamageHandler : NetworkBehaviour {
     public float MushForce;
 
     public Text DamagedHandler;
+    public Color InitialColor;
 
     float TimeWhenPickUp;
     float Duration;
+
+    public bool DommageBlock;
 
     public float DurationTime;
     // Use this for initialization
     void Start () {
         rigidbody = GetComponent<Rigidbody>();
-	}
+        InitialColor = DamagedHandler.color;
+    }
 	
 	// Update is called once per frame
 	void Update () {
@@ -112,7 +116,8 @@ public class DamageHandler : NetworkBehaviour {
             {
                 TimeWhenPickUp = 0;
                 Duration = 0;
-                this.transform.localScale = new Vector3(1, 1, 1);
+                DommageBlock = false;
+                DamagedHandler.color = InitialColor;
             }
         }
     }
@@ -135,11 +140,12 @@ public class DamageHandler : NetworkBehaviour {
         }
         else if (collision.gameObject.tag == "The Mushroom" && TimeWhenPickUp == 0f)
         {
-            this.transform.localScale = new Vector3(5, 5, 5);
+            DommageBlock = true;
+            DamagedHandler.color = Color.blue;
             TimeWhenPickUp = Time.time;
             Duration = TimeWhenPickUp + DurationTime;
         }
-        else if(otherRigidbody.GetComponent<Projectile>() == null)
+        else if(otherRigidbody.GetComponent<Projectile>() == null || !DommageBlock)
         {            
             return;
         }

@@ -118,7 +118,7 @@ MonoBehaviour:
   hitParticle: {fileID: 198031856094365206, guid: 415bb9c3e3882954e8e17b3ecc2fb4d5,
     type: 2}
   damageValue: 15
-  baseKnockback: 0
+  baseKnockback: 15
   upwardModifier: 2
   explosionRadius: 5
 --- !u!114 &114431544042085992

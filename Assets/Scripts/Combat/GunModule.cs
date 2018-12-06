@@ -110,4 +110,48 @@ public abstract class GunBase : MonoBehaviour
 
         NetworkServer.Spawn(newProjectile);
     }
+
+    virtual public void Shoot(Ray direction)
+    {
+        readyToShoot = false;
+
+        //Casts ray from camera through middle of the screen.
+        Ray rayFromCamera = camJoueur.ViewportPointToRay(Vector3.one * 0.5f);
+        RaycastHit rch;
+
+        GameObject newProjectile;
+
+        //If the ray hit something
+        if (Physics.Raycast(rayFromCamera, out rch))
+        {
+            //Turn gun towards thing it hit
+            transform.LookAt(rch.point);
+
+            newProjectile = (GameObject)Instantiate(projectilePrefab, pmTransform.position, pmTransform.rotation);
+            Transform newProTrans = newProjectile.GetComponent<Transform>();
+            Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
+
+            //Detach projectile and place in trashcan object.
+            newProTrans.SetParent(bulletBin.GetComponent<Transform>());
+
+            //Shoot projectile.
+
+            newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
+        }
+        else
+        {
+            transform.LookAt(rayFromCamera.GetPoint(100));
+
+            newProjectile = (GameObject)Instantiate(projectilePrefab, pmTransform.position, pmTransform.rotation);
+            Transform newProTrans = newProjectile.GetComponent<Transform>();
+            Rigidbody newProBody = newProjectile.GetComponent<Rigidbody>();
+
+            //Detach projectile and place in trashcan object.
+            newProTrans.SetParent(bulletBin.GetComponent<Transform>());
+
+            newProBody.AddRelativeForce(Vector3.forward * projectileSpeed, ForceMode.VelocityChange);
+        }
+
+        NetworkServer.Spawn(newProjectile);
+    }
 }

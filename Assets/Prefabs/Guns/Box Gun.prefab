@@ -81,12 +81,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ee483111c5d52b24fa6f4a0aec69b837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  posOffset: {x: 0, y: 0, z: 0}
   projectilePrefab: {fileID: 1973731727372588, guid: 9cdc42d6f7fd65847b8d3fe4bf5cf5d7,
     type: 2}
   maxAmmo: 10
   fireRate: 1
-  projectileSpeed: 20
+  projectileSpeed: 50
   bulletBin: {fileID: 0}
+  camJoueur: {fileID: 0}
 --- !u!114 &114660792779727044
 MonoBehaviour:
   m_ObjectHideFlags: 1

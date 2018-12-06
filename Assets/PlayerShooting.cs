@@ -24,6 +24,8 @@ public class PlayerShooting : NetworkBehaviour {
 
     public GameObject ToEnable;
 
+    public Camera playerCam;
+
     public override void OnStartLocalPlayer()
     {
         processInput = isLocalPlayer;
@@ -79,7 +81,8 @@ public class PlayerShooting : NetworkBehaviour {
             print(equippedGun.ReadyToShoot);
             if (equippedGun.ReadyToShoot)
             {
-                CmdShoot(netId);
+                Ray direction = playerCam.ViewportPointToRay(Vector3.zero * 0.5f);
+                CmdShoot(direction);
                 if (gunIndex == 0)
                     ToEnable.SetActive(true);
                 AfterShoot = true;
@@ -97,7 +100,7 @@ public class PlayerShooting : NetworkBehaviour {
         }
     }
 
-    void GunTextChanged()
+    void ChangeGunHUDText()
     {
         if (gunIndex == 0)
             GunGui.text = "Pea Gun";
@@ -109,11 +112,11 @@ public class PlayerShooting : NetworkBehaviour {
     }
 
     [Command]
-    public  void CmdShoot(NetworkInstanceId netID)
+    public  void CmdShoot(Ray direction)
     {
-        print("Reached? " + gameObject);
+        Ray serverDirection = direction;
         print(EquippedGun);
-        EquippedGun.Shoot();
+        EquippedGun.Shoot(direction);
     }
 
     private int gunIndex = 0;
@@ -138,7 +141,7 @@ public class PlayerShooting : NetworkBehaviour {
 
         //Change equipped.
         equippedGun = availableGuns[gunIndex];
-        GunTextChanged();
+        ChangeGunHUDText();
 
 
         //Change visible mesh
@@ -166,6 +169,7 @@ public class PlayerShooting : NetworkBehaviour {
     {
         ++gunIndex;
         EquipGun();
+        ChangeGunHUDText();
     }
 
     [Command]
@@ -173,5 +177,6 @@ public class PlayerShooting : NetworkBehaviour {
     {
         --gunIndex;
         EquipGun();
+        ChangeGunHUDText();
     }
 }
